@@ -1,0 +1,58 @@
+name: Build and Deploy to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: 📦 Install client dependencies
+        working-directory: ./client
+        run: npm install
+
+      - name: 🛠️ Build client
+        working-directory: ./client
+        run: npm run build
+
+      - name: 🚚 Copy frontend into server/public
+        run: |
+          rm -rf server/public
+          mkdir -p server/public
+          cp -r client/dist/* server/public/
+
+      - name: 🔧 Install TypeScript globally
+        run: npm install -g typescript
+
+      - name: 🧼 Clean dev dependencies in server
+        working-directory: ./server
+        run: npm install
+
+      - name: 🛠️ Build server
+        working-directory: ./server
+        run: npm run build
+
+      - name: 📁 Copy public folder to dist
+        working-directory: ./server
+        run: |
+          mkdir -p ./dist/public
+          cp -r ./public/* ./dist/public/
+
+      - name: 🚀 Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: cucoxresumeapp
+          slot-name: Production
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./server/public
