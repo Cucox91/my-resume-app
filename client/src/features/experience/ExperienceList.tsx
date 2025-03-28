@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getAllExperiences } from "../../apis/experienceApi";
-import ExperienceItem from "./experienceItem";
+import ExperienceItem from "./ExperienceItem";
 import { IExperience } from "../../models/IExperience";
 
-const Experience: React.FC = () => {
+const ExperienceList: React.FC = () => {
   const [experiences, setExperiences] = useState<IExperience[] | null>(null);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const Experience: React.FC = () => {
         }
       } catch (err: any) {
         console.log("Error Retrieving the Experiences");
+        console.log(err);
       }
     };
     getAllExperiencesAsync();
@@ -43,4 +44,4 @@ const Experience: React.FC = () => {
   }
 };
 
-export default Experience;
+export default ExperienceList;

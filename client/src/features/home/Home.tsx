@@ -5,12 +5,13 @@ import {
   Header,
   Segment,
   Image,
-  Label,
-  List,
   Divider,
   Icon,
 } from "semantic-ui-react";
-import Experience from "../experience/experience";
+import ExperienceList from "../experience/ExperienceList";
+import formatDate from "../../utils/DateAndTime";
+import EducationList from "../education/EducationList";
+import SkillList from "../skills/SkillList";
 
 const Home: React.FC = () => {
   return (
@@ -26,9 +27,13 @@ const Home: React.FC = () => {
             </p>
           </Grid.Column>
           <Grid.Column textAlign="right">
-            <Header as="h4" style={{ marginTop: "0.5rem" }}>
-              Software Architect | AI Enthusiast
+            <Header
+              as="h4"
+              style={{ marginTop: "0.5rem", marginBottom: "0.1rem" }}
+            >
+              Latest Update: <br />
             </Header>
+            <p>{formatDate(new Date())}</p>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -50,7 +55,7 @@ const Home: React.FC = () => {
             Raziel Arias
           </Header>
           <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }}>
-            I Like to solve Problems
+            I Like to solve Problems.
           </p>
         </Segment>
       </Segment>
@@ -62,8 +67,7 @@ const Home: React.FC = () => {
           Experience
         </Header>
       </Divider>
-      <Experience/>
-      
+      <ExperienceList />
 
       {/* Education */}
       <Divider horizontal>
@@ -72,12 +76,7 @@ const Home: React.FC = () => {
           Education
         </Header>
       </Divider>
-      <Segment basic>
-        <Header as="h3">
-          B.Sc. Computer Science
-          <Header.Subheader>Your University (2015)</Header.Subheader>
-        </Header>
-      </Segment>
+      <EducationList />
 
       {/* Skills */}
       <Divider horizontal>
@@ -86,14 +85,7 @@ const Home: React.FC = () => {
           Skills
         </Header>
       </Divider>
-      <Segment basic>
-        {/* You can replace these Labels with however many skills you have */}
-        <Label style={{ margin: "0.25rem" }}>C#</Label>
-        <Label style={{ margin: "0.25rem" }}>TypeScript</Label>
-        <Label style={{ margin: "0.25rem" }}>React</Label>
-        <Label style={{ margin: "0.25rem" }}>Azure</Label>
-        <Label style={{ margin: "0.25rem" }}>AI/ML</Label>
-      </Segment>
+      <SkillList />
     </Container>
   );
 };

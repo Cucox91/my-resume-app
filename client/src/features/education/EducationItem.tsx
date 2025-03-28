@@ -1,21 +1,21 @@
 import React from "react";
-import { IExperience } from "../../models/IExperience";
+import { IEducation } from "../../models/IEducation";
 import { Header, List, Segment } from "semantic-ui-react";
 import formatDate from "../../utils/DateAndTime";
 
 interface IProps {
-  item: IExperience;
+  item: IEducation;
 }
 
-const ExperienceItem: React.FC<IProps> = (props: IProps) => {
-  const { company, title, fromDate, toDate, responsibilities } = props.item;
+const EducationItem: React.FC<IProps> = (props: IProps) => {
+  const { school, title, fromDate, toDate, responsibilities } = props.item;
   return (
     <>
       <Segment basic>
         <Header as="h3">
-          {title} &amp; {company}
+          {title}
           <Header.Subheader>
-            {formatDate(fromDate)} – {formatDate(toDate!)}
+            {school} ({formatDate(fromDate)} to {formatDate(toDate!)})
           </Header.Subheader>
         </Header>
         <List bulleted>
@@ -28,4 +28,4 @@ const ExperienceItem: React.FC<IProps> = (props: IProps) => {
   );
 };
 
-export default ExperienceItem;
+export default EducationItem;
