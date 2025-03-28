@@ -10,7 +10,6 @@ export const getAllExperiences: RequestHandler = async (
 ) => {
   try {
     const experiences = await Experience.find();
-    console.log("Raziel", experiences);
     if (experiences.length == 0) {
       await seedExperiences();
     }

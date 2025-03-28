@@ -1,5 +1,6 @@
 import Experience, { IExperience } from "../models/mongoose/ExperienceModel";
 import Education, { IEducation } from "../models/mongoose/EducationModel";
+import Skill, { ISkill } from "../models/mongoose/SkillModel";
 
 export const seedExperiences = async () => {
   const experiences = [
@@ -43,4 +44,27 @@ export const seedEducation = async () => {
   ];
 
   await Education.insertMany(educations);
+};
+
+export const seedSkills = async () => {
+  const skills = [
+    {
+      name: "C#",
+      description: "The C# Programming Language and the .NET Library",
+      yearsOfProffesionalExperience: 11,
+      yearsOfIndividualExperience: 16, //2009
+      yearLastUse: 2025,
+      notes: ["My Main Professional Development Language."],
+    },
+    {
+      name: "TypeScript",
+      description: "Used with the MERN Stack Mainly.",
+      yearsOfProffesionalExperience: 7,
+      yearsOfIndividualExperience: 7, //2009
+      yearLastUse: 2025,
+      notes: ["This is the Language I using the most recently."],
+    },
+  ];
+
+  await Skill.insertMany(skills);
 };

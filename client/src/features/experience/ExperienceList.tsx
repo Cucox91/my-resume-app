@@ -7,16 +7,6 @@ const ExperienceList: React.FC = () => {
   const [experiences, setExperiences] = useState<IExperience[] | null>(null);
 
   useEffect(() => {
-    // const token = localStorage.getItem("token"); // Needed later to find the logged user.
-    // if (token) {
-    //   try {
-    //     const decoded = jwtDecode<JwtPayload>(token);
-    //     setUser(decoded);
-    //   } catch (error) {
-    //     console.error("Failed to decode token", error);
-    //   }
-    // }
-
     const getAllExperiencesAsync = async () => {
       try {
         const experiencesFromServer = await getAllExperiences();
@@ -35,7 +25,7 @@ const ExperienceList: React.FC = () => {
     return (
       <>
         {experiences.map((e) => (
-          <ExperienceItem id={e.id!} item={e} />
+          <ExperienceItem id={e._id!} key={e._id!} item={e} />
         ))}
       </>
     );

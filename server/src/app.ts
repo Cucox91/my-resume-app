@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes";
 import experienceRoute from "./routes/experienceRoute";
 import educationRoute from "./routes/educationRoute";
+import skillRoute from "./routes/skillRoute";
 
 dotenv.config();
 
@@ -36,5 +37,6 @@ mongoose
 app.use("/api/auth", authRoutes);
 app.use("/api/experiences", experienceRoute);
 app.use("/api/education", educationRoute);
+app.use("/api/skills", skillRoute);
 
 export default app;

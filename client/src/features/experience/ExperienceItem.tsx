@@ -12,7 +12,7 @@ const ExperienceItem: React.FC<IProps> = (props: IProps) => {
   const { company, title, fromDate, toDate, responsibilities } = props.item;
   return (
     <>
-      <Segment id={props.id} basic>
+      <Segment id={props.id!} key={props.id!} basic>
         <Header as="h3">
           {title} &amp; {company}
           <Header.Subheader>
@@ -21,7 +21,9 @@ const ExperienceItem: React.FC<IProps> = (props: IProps) => {
         </Header>
         <List bulleted>
           {responsibilities.map((r, index) => (
-            <List.Item id={index}>{r}</List.Item>
+            <List.Item id={index} key={index}>
+              {r}
+            </List.Item>
           ))}
         </List>
       </Segment>

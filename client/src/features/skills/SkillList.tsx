@@ -7,16 +7,6 @@ const SkillList: React.FC = () => {
   const [skills, setSkills] = useState<ISkill[] | null>(null);
 
   useEffect(() => {
-    // const token = localStorage.getItem("token"); // Needed later to find the logged user.
-    // if (token) {
-    //   try {
-    //     const decoded = jwtDecode<JwtPayload>(token);
-    //     setUser(decoded);
-    //   } catch (error) {
-    //     console.error("Failed to decode token", error);
-    //   }
-    // }
-
     const getAllSkillsAsync = async () => {
       try {
         const skillsFromServer = await getAllSkills();
@@ -35,7 +25,7 @@ const SkillList: React.FC = () => {
     return (
       <>
         {skills.map((s) => (
-          <SkillItem item={s} />
+          <SkillItem id={s._id!} key={s._id!} item={s} />
         ))}
       </>
     );

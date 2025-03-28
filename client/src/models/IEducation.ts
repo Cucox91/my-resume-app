@@ -1,5 +1,5 @@
 export interface IEducation {
-    id?: string | undefined,
+    _id?: string | undefined,
     title: string;
     school: string;
     fromDate: Date;

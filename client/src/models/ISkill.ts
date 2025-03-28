@@ -1,5 +1,9 @@
 export interface ISkill {
-  id?: string | undefined;
+  _id?: string | undefined;
   name: string;
-  yearsOfExperience: number;
+  description?: string;
+  yearsOfProffesionalExperience: number;
+  yearsOfIndividualExperience: number;
+  yearLastUse: number;
+  notes: string[];
 }

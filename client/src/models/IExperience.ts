@@ -1,5 +1,5 @@
 export interface IExperience {
-  id?: string | undefined,
+  _id?: string | undefined,
   title: string;
   company: string;
   fromDate: Date;

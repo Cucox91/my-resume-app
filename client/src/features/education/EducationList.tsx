@@ -35,7 +35,7 @@ const EducationList: React.FC = () => {
     return (
       <>
         {educations.map((e) => (
-          <EducationItem item={e} />
+          <EducationItem id={e._id!} key={e._id!} item={e} />
         ))}
       </>
     );
