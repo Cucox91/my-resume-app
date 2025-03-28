@@ -21,3 +21,4 @@ yarn-error.log*
 
 # Server Public Folder
 /server/public
+/server/build-output
