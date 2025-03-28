@@ -8,10 +8,10 @@ interface IProps {
 }
 
 const EducationItem: React.FC<IProps> = (props: IProps) => {
-  const { school, title, fromDate, toDate, responsibilities } = props.item;
+  const { school, title, fromDate, toDate, responsibilities, id } = props.item;
   return (
     <>
-      <Segment basic>
+      <Segment id={id} basic>
         <Header as="h3">
           {title}
           <Header.Subheader>
@@ -19,8 +19,8 @@ const EducationItem: React.FC<IProps> = (props: IProps) => {
           </Header.Subheader>
         </Header>
         <List bulleted>
-          {responsibilities.map((r) => (
-            <List.Item>{r}</List.Item>
+          {responsibilities.map((r, index) => (
+            <List.Item id={index}>{r}</List.Item>
           ))}
         </List>
       </Segment>

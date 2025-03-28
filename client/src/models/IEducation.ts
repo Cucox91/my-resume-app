@@ -1,6 +1,5 @@
 export interface IEducation {
     id?: string | undefined,
-    userId: string,
     title: string;
     school: string;
     fromDate: Date;

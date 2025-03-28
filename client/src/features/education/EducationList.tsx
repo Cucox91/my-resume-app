@@ -40,7 +40,7 @@ const EducationList: React.FC = () => {
       </>
     );
   } else {
-    <>No Education Available...</>;
+    return <>No Education Available...</>;
   }
 };
 

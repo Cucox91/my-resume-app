@@ -35,12 +35,12 @@ const ExperienceList: React.FC = () => {
     return (
       <>
         {experiences.map((e) => (
-          <ExperienceItem item={e} />
+          <ExperienceItem id={e.id!} item={e} />
         ))}
       </>
     );
   } else {
-    <>Not Exists</>;
+    return <>Not Experience Available.</>;
   }
 };
 
