@@ -1,3 +1,4 @@
+import cors from 'cors';
 import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
@@ -7,6 +8,18 @@ import authRoutes from './routes/authRoutes';
 dotenv.config();
 
 const app = express();
+
+// Declare CORS Options
+const corsOptions = {
+  origin: process.env.CLIENT_URL || "http://localhost:5002",
+  credentials: true,
+}
+
+// Enable CORS with these options
+app.use(cors(corsOptions));
+
+// Optionally, if you want to allow pre-flight across the board
+app.options('*', cors(corsOptions));
 
 // Middleware to parse JSON requests
 app.use(express.json());

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Message } from "semantic-ui-react";
-import axios from "axios";
+import { registerUser } from "../../apis/authApi";
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -14,12 +14,11 @@ const Register: React.FC = () => {
     setSuccess("");
 
     try {
-      await axios.post("/api/auth/register", { username, password });
+      await registerUser(username, password);
       setSuccess("Registration successful! You can now log in.");
       setUsername("");
       setPassword("");
     } catch (err: any) {
-      console.log("Raziel", err);
       setError(err?.response?.data?.message || "Registration failed");
     }
   };
