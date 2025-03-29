@@ -1,6 +1,7 @@
 import React from "react";
 import { ISkill } from "../../models/ISkill";
 import { Button, Divider, Label, Popup } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 interface IProps {
   id: string;
@@ -10,7 +11,6 @@ interface IProps {
 const SkillItem: React.FC<IProps> = (props: IProps) => {
   const {
     name,
-    notes,
     yearLastUse,
     yearsOfIndividualExperience,
     yearsOfProffesionalExperience,
@@ -36,7 +36,13 @@ const SkillItem: React.FC<IProps> = (props: IProps) => {
       key={props.id}
       header={name}
       trigger={
-        <Button id={props.id} key={props.id} style={{ margin: "0.25rem" }}>
+        <Button
+          id={props.id}
+          key={props.id}
+          style={{ margin: "0.25rem" }}
+          as={Link}
+          to={`/skill/${props.id}`}
+        >
           {name}
         </Button>
       }

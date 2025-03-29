@@ -9,6 +9,7 @@ import ResumeDetail from "./features/home/ResumeDetail";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./features/auth/Register";
 import AdminDashboard from "./features/admin/AdminDashboard";
+import SkillDetails from "./features/skills/SkillDetails";
 
 const App: React.FC = () => {
   return (
@@ -24,6 +25,7 @@ const App: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/resume/:id" element={<ResumeDetail />} />
+            <Route path="/skill/:id" element={<SkillDetails />} />
             <Route
               path="/admin"
               element={
