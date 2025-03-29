@@ -61,30 +61,37 @@ const Home: React.FC = () => {
       </Segment>
 
       {/* Experience */}
+
+      <Divider/>
       <Divider horizontal>
         <Header as="h4">
           <Icon name="briefcase" />
           Experience
         </Header>
       </Divider>
+      <Divider/>
       <ExperienceList />
 
       {/* Education */}
+      <Divider/>
       <Divider horizontal>
         <Header as="h4">
           <Icon name="student" />
           Education
         </Header>
       </Divider>
+      <Divider/>
       <EducationList />
 
       {/* Skills */}
+      <Divider/>
       <Divider horizontal>
         <Header as="h4">
           <Icon name="code" />
           Skills
         </Header>
       </Divider>
+      <Divider/>
       <SkillList />
     </Container>
   );

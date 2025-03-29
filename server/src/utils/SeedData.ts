@@ -1,6 +1,6 @@
 import Experience, { IExperience } from "../models/mongoose/ExperienceModel";
 import Education, { IEducation } from "../models/mongoose/EducationModel";
-import Skill, { ISkill } from "../models/mongoose/SkillModel";
+import Skill, { ConfidenceLevel, ISkill } from "../models/mongoose/SkillModel";
 
 export const seedExperiences = async () => {
   const experiences = [
@@ -48,13 +48,6 @@ export const seedExperiences = async () => {
         "Delivered robust backend solutions to support the highly transactional Maestro SIS, optimizing performance and ensuring scalability for educational institutions.",
       ],
     },
-    // {
-    //   title: "Director of Operations",
-    //   company: "Globenet International Corp.",
-    //   fromDate: new Date("05-01-2017"),
-    //   toDate: new Date("11-01-2017"),
-    //   responsibilities: [],
-    // },
     {
       title: "Junior .NET Developer",
       company: "eNet IT Group",
@@ -88,7 +81,12 @@ export const seedEducation = async () => {
       where: "Havana, Cuba",
       fromDate: new Date("08-01-2021"),
       toDate: new Date("05-01-2016"),
-      responsibilities: ["Mathematics", "Programming", "CS Fundamentals", "Others"],
+      responsibilities: [
+        "Mathematics",
+        "Programming",
+        "CS Fundamentals",
+        "Others",
+      ],
     },
     {
       title: "Computer Programming Technical High School",
@@ -105,6 +103,7 @@ export const seedEducation = async () => {
 
 export const seedSkills = async () => {
   const skills = [
+    // Languages:
     {
       name: "C#",
       description: "The C# Programming Language and the .NET Library",
@@ -112,14 +111,211 @@ export const seedSkills = async () => {
       yearsOfIndividualExperience: 16, //2009
       yearLastUse: 2025,
       notes: ["My Main Professional Development Language."],
+      confidence: ConfidenceLevel.High,
     },
     {
       name: "TypeScript",
       description: "Used with the MERN Stack Mainly.",
       yearsOfProffesionalExperience: 7,
-      yearsOfIndividualExperience: 7, //2009
+      yearsOfIndividualExperience: 7,
       yearLastUse: 2025,
       notes: ["This is the Language I using the most recently."],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "JavScript",
+      description: "Used with the MERN Stack Mainly.",
+      yearsOfProffesionalExperience: 11,
+      yearsOfIndividualExperience: 11,
+      yearLastUse: 2025,
+      notes: [
+        "I use it for some projects that are not using React or Angular. Otherwise I will go with TS.",
+      ],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "Python",
+      description: "Learning it. Have done some several small projects",
+      yearsOfProffesionalExperience: 11,
+      yearsOfIndividualExperience: 11,
+      yearLastUse: 2025,
+      notes: [
+        "Haven't used professionally yet mostly on personal projects. I'm still learning it.",
+      ],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "C",
+      description: "Re-Learning it",
+      yearsOfProffesionalExperience: 0,
+      yearsOfIndividualExperience: 5,
+      yearLastUse: 2025,
+      notes: [
+        "I spent a few years working with C and C++ when I was youger. Never used it professionally.",
+        "Now I'm transitioning to Low Level Programming and I'm currently learning it.",
+      ],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "C++",
+      description: "Re-Learning it",
+      yearsOfProffesionalExperience: 0,
+      yearsOfIndividualExperience: 5,
+      yearLastUse: 2008,
+      notes: [
+        "I spent a few years working with C and C++ when I was youger. Never used it professionally.",
+        "Now I'm transitioning to Low Level Programming and I'm currently learning it.",
+      ],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    // Frameworks and Tools:
+    {
+      name: "Blazor",
+      description:
+        "Currently using it on a Work Project. Honestly. I don't Like it. Will learn Next.JS for SSR better.",
+      yearsOfProffesionalExperience: 1,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "React",
+      description:
+        "Currently using it for Personal Projects. But have used it professionally several times in the past years. ",
+      yearsOfProffesionalExperience: 6,
+      yearsOfIndividualExperience: 6,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "React",
+      description:
+        "Currently using it for Personal Projects. But have used it professionally several times in the past years. ",
+      yearsOfProffesionalExperience: 6,
+      yearsOfIndividualExperience: 6,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "Angular",
+      description:
+        "It was mostly my development front end Framework up to 2023.",
+      yearsOfProffesionalExperience: 7,
+      yearsOfIndividualExperience: 7,
+      yearLastUse: 2023,
+      notes: [
+        "I'm a little bit rusty. But in a few days I can pick up on an Angular Project without any issues.",
+      ],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Node",
+      description: "Using it in Personal and Professional Projects.",
+      yearsOfProffesionalExperience: 7,
+      yearsOfIndividualExperience: 7,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "Entity Framework Core",
+      description:
+        "Currently using it on a Professional Project. This my to go ORM.",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2025,
+      notes: [
+        "This is a SQL Skill killer. I still do some queries on SQL to keep the skill relatively fresh.",
+      ],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "ASP.NET Core",
+      description:
+        "Where do I start. And where do I end. This have been my bread and butter.",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2025,
+      notes: [
+        "This is a SQL Skill killer. I still do some queries on SQL to keep the skill relatively fresh.",
+      ],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "HTMX",
+      description:
+        "Currently using it on a Professional Project. Using it together with Blazor SSR and Minimal APIs.",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2025,
+      notes: [
+        "Currently I'm hating it, but is because of a bad architectural choise. HTMX is promising by itself.",
+      ],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "Semantic UI",
+      description:
+        "My favorite components and design framework. What I love the most is that is easy and fast.",
+      yearsOfProffesionalExperience: 6,
+      yearsOfIndividualExperience: 6,
+      yearLastUse: 2025,
+      notes: [
+        "This project is made in Semantic UI.",
+        "Used in most of my personal projects",
+      ],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "Bootstrap",
+      description: "If I can't use Semantic UI then I go with Bootstrap.",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2024,
+      notes: ["I use it mostly on Professional Projects."],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "Tailwind CSS",
+      description: "Currently using it on a Professional Project.",
+      yearsOfProffesionalExperience: 1,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2024,
+      notes: [
+        "Not liking it. I know is very powerfull. But I mostly build apps with simple visual components.",
+      ],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "Express",
+      description: "It goes by default with Node.",
+      yearsOfProffesionalExperience: 7,
+      yearsOfIndividualExperience: 7,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "Mongoose",
+      description: "Is my default ODM when using MongoDB",
+      yearsOfProffesionalExperience: 7,
+      yearsOfIndividualExperience: 7,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "Postman",
+      description:
+        "The default tool to test APIs either manually or automated.",
+      yearsOfProffesionalExperience: 7,
+      yearsOfIndividualExperience: 7,
+      yearLastUse: 2025,
+      notes: ["I want to learn more from this amazing tool."],
+      confidence: ConfidenceLevel.Beginner,
     },
   ];
 

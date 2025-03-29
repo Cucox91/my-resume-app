@@ -1,6 +1,6 @@
 import React from "react";
 import { IExperience } from "../../models/IExperience";
-import { Header, List, Segment } from "semantic-ui-react";
+import { Divider, Header, List, Segment } from "semantic-ui-react";
 import formatDate from "../../utils/DateAndTime";
 
 interface IProps {
@@ -16,7 +16,7 @@ const ExperienceItem: React.FC<IProps> = (props: IProps) => {
         <Header as="h3">
           {title} &amp; {company}
           <Header.Subheader>
-            {formatDate(fromDate)} – {formatDate(toDate!)}
+            {formatDate(fromDate)} – {toDate ? formatDate(toDate!) : "Current"}
           </Header.Subheader>
         </Header>
         <List bulleted>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllExperiences } from "../../apis/experienceApi";
 import ExperienceItem from "./ExperienceItem";
 import { IExperience } from "../../models/IExperience";
+import { Divider } from "semantic-ui-react";
 
 const ExperienceList: React.FC = () => {
   const [experiences, setExperiences] = useState<IExperience[] | null>(null);
@@ -24,8 +25,11 @@ const ExperienceList: React.FC = () => {
   if (experiences) {
     return (
       <>
-        {experiences.map((e) => (
-          <ExperienceItem id={e._id!} key={e._id!} item={e} />
+        {experiences.map((e, index) => (
+          <>
+            <ExperienceItem id={e._id!} key={e._id!} item={e} />
+            {experiences.length - 1 !== index && <Divider />}
+          </>
         ))}
       </>
     );
