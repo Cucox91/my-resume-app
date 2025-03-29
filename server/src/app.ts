@@ -14,7 +14,7 @@ const app = express();
 
 // Declare CORS Options
 const corsOptions = {
-  origin: process.env.CLIENT_URL || "http://localhost:5002",
+  origin: process.env.CLIENT_URL || "https://localhost:5001", //Raziel: In the future fix this for azure. This is taking the hardcoded value for now.
   credentials: true,
 };
 
