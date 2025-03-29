@@ -1,6 +1,6 @@
 import React from "react";
 import { ISkill } from "../../models/ISkill";
-import { Button, Divider, Label, Popup } from "semantic-ui-react";
+import { Button, Divider, Popup } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 interface IProps {
