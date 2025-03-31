@@ -13,6 +13,7 @@ import formatDate from "../../utils/DateAndTime";
 import EducationList from "../education/EducationList";
 import SkillList from "../skills/SkillList";
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 
 const Home: React.FC = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 }); // Mobile threshold
@@ -71,7 +72,10 @@ const Home: React.FC = () => {
           />
         )}
         <Segment vertical style={{ verticalAlign: "top" }}>
-          <Header as="h1" style={{ marginTop: "0.1rem", marginBottom: "0.9rem" }}>
+          <Header
+            as="h1"
+            style={{ marginTop: "0.1rem", marginBottom: "0.9rem" }}
+          >
             Raziel Arias
           </Header>
           <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }}>
@@ -120,6 +124,18 @@ const Home: React.FC = () => {
       </Divider>
       <Divider />
       <SkillList />
+      <Divider horizontal>
+        {" "}
+        <Header
+          as={Link}
+          to="/skills"
+          style={{ color: "inherit", textDecoration: "none" }}
+          onMouseEnter={(e: any) => (e.currentTarget.style.color = "blue")}
+          onMouseLeave={(e: any) => (e.currentTarget.style.color = "inherit")}
+        >
+          See More...
+        </Header>
+      </Divider>
     </Container>
   );
 };
