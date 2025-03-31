@@ -1,7 +1,7 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState } from "react";
 import { ISkill } from "../../models/ISkill";
 import { getAllSkills } from "../../apis/skillsApi";
-import { Divider, Header, Icon, List, ListItem, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
+import { Header, Icon, List, ListItem, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
 
 const SkillTable: React.FC = () => {
     const [skills, setSkills] = useState<ISkill[] | null>(null);
