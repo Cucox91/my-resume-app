@@ -125,10 +125,9 @@ const Home: React.FC = () => {
       <Divider />
       <SkillList />
       <Divider horizontal>
-        {" "}
         <Header
           as={Link}
-          to="/skills"
+          to="/skill"
           style={{ color: "inherit", textDecoration: "none" }}
           onMouseEnter={(e: any) => (e.currentTarget.style.color = "blue")}
           onMouseLeave={(e: any) => (e.currentTarget.style.color = "inherit")}
