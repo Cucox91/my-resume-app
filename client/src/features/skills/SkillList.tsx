@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllSkills } from "../../apis/skillsApi";
 import { ISkill } from "../../models/ISkill";
 import SkillItem from "./SkillItem";
+import { Container } from "semantic-ui-react";
 
 const SkillList: React.FC = () => {
   const [skills, setSkills] = useState<ISkill[] | null>(null);
@@ -23,11 +24,11 @@ const SkillList: React.FC = () => {
 
   if (skills) {
     return (
-      <>
+      <Container textAlign="center">
         {skills.map((s) => (
           <SkillItem id={s._id!} key={s._id!} item={s} />
         ))}
-      </>
+      </Container>
     );
   } else {
     return <>No Skills</>;

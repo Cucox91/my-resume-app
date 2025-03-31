@@ -1,6 +1,6 @@
 import React from "react";
 import { IExperience } from "../../models/IExperience";
-import { Divider, Header, List, Segment } from "semantic-ui-react";
+import { Header, List, Segment } from "semantic-ui-react";
 import formatDate from "../../utils/DateAndTime";
 
 interface IProps {
