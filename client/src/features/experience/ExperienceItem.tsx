@@ -14,11 +14,18 @@ const ExperienceItem: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       <Segment id={props.id!} key={props.id!} basic>
-        <Header as={Link} to={`/experiences/${props.id}`}
+        <Header
+          as={Link}
+          to={`/experiences/${props.id}`}
           style={{ color: "inherit", textDecoration: "none" }}
-          onMouseEnter={(e: any) => (e.currentTarget.style.color = "blue")}
-          onMouseLeave={(e: any) => (e.currentTarget.style.color = "inherit")}>
-          {title} &amp; {company}
+          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) =>
+            (e.currentTarget.style.color = "blue")
+          }
+          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) =>
+            (e.currentTarget.style.color = "inherit")
+          }
+        >
+          {title} at {company}
           <Header.Subheader>
             {formatDate(fromDate)} – {toDate ? formatDate(toDate!) : "Current"}
           </Header.Subheader>

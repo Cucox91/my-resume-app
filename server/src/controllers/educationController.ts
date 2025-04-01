@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import Education, { IEducation } from "../models/mongoose/EducationModel";
+import Subject, { ISubject } from "../models/mongoose/SubjectModel";
 import { seedEducation } from "../utils/SeedData";
 
 // Retrieve all education
@@ -29,7 +30,10 @@ export const getEducation: RequestHandler = async (
 ) => {
   try {
     const { id } = req.params;
-    const education = await Education.findById(id);
+    const education = await Education.findById(id).populate({
+      path: "subjects",
+      model: Subject,
+    });
     if (!education) {
       res.status(404).json({ message: "Education not found" });
     }

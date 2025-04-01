@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   return (
     <Segment inverted vertical style={{ padding: '2em 0em' }}>
       <Container textAlign="center">
-        © {new Date().getFullYear()} My Resume App. All rights reserved.
+        © {new Date().getFullYear()} Raziel Arias. All rights reserved.
       </Container>
     </Segment>
   );

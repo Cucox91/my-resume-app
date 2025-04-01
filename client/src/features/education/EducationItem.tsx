@@ -2,6 +2,7 @@ import React from "react";
 import { IEducation } from "../../models/IEducation";
 import { Header, List, Segment } from "semantic-ui-react";
 import formatDate from "../../utils/DateAndTime";
+import { Link } from "react-router-dom";
 
 interface IProps {
   id: string;
@@ -13,7 +14,17 @@ const EducationItem: React.FC<IProps> = (props: IProps) => {
   return (
     <>
       <Segment id={props.id!} key={props.id!} basic>
-        <Header as="h3">
+        <Header
+          as={Link}
+          to={`/education/${props.id}`}
+          style={{ color: "inherit", textDecoration: "none" }}
+          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) =>
+            (e.currentTarget.style.color = "blue")
+          }
+          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) =>
+            (e.currentTarget.style.color = "inherit")
+          }
+        >
           {title}
           <Header.Subheader>
             {school} ({formatDate(fromDate)} to {formatDate(toDate!)})

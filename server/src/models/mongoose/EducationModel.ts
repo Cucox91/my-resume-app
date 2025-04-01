@@ -1,7 +1,7 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { IBaseDocument } from "../IBaseDocument";
-import { IUser } from "./UserModel";
 import { BaseModel } from "./BaseModel";
+import { ISubject } from "./SubjectModel";
 
 export interface IEducation extends IBaseDocument {
   _id: string | undefined;
@@ -10,6 +10,7 @@ export interface IEducation extends IBaseDocument {
   fromDate: Date;
   toDate?: Date | null;
   responsibilities: string[];
+  subjects: ISubject[];
 }
 
 const EducationSchema = new Schema<IEducation>({
@@ -17,6 +18,7 @@ const EducationSchema = new Schema<IEducation>({
   school: { type: String, required: true },
   fromDate: { type: Date, required: true },
   toDate: { type: Date },
+  subjects: [{ type: Schema.Types.ObjectId, ref: "Subject" }],
   responsibilities: { type: [String] },
   ...BaseModel,
 });

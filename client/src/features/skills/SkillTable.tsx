@@ -13,7 +13,7 @@ const SkillTable: React.FC = () => {
                 if (skillsFromServer) {
                     setSkills(skillsFromServer);
                 }
-            } catch (err: any) {
+            } catch (err: unknown) {
                 console.log("Error Retrieving the Skills");
                 console.log(err);
             }

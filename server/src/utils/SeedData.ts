@@ -79,7 +79,7 @@ export const seedEducation = async () => {
       title: "B.Sc. Computer Sciences",
       school: "Havana University",
       where: "Havana, Cuba",
-      fromDate: new Date("08-01-2021"),
+      fromDate: new Date("09-01-2011"),
       toDate: new Date("05-01-2016"),
       responsibilities: [
         "Mathematics",
@@ -321,3 +321,4 @@ export const seedSkills = async () => {
 
   await Skill.insertMany(skills);
 };
+

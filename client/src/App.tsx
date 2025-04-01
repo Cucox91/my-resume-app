@@ -11,6 +11,7 @@ import Register from "./features/auth/Register";
 import AdminDashboard from "./features/admin/AdminDashboard";
 import SkillDetails from "./features/skills/SkillDetails";
 import SkillTable from "./features/skills/SkillTable";
+import EducationDetails from "./features/education/EducationDetails";
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,8 @@ const App: React.FC = () => {
             <Route path="/resume/:id" element={<ResumeDetail />} />
             <Route path="/skill/:id" element={<SkillDetails />} />
             <Route path="/skill/" element={<SkillTable />} />
+            <Route path="/education/:id" element={<EducationDetails />} />
+
             <Route
               path="/admin"
               element={
