@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 import { IBaseDocument } from "../IBaseDocument";
 import { BaseModel } from "./BaseModel";
 import { ISubject } from "./SubjectModel";
@@ -10,7 +10,7 @@ export interface IEducation extends IBaseDocument {
   fromDate: Date;
   toDate?: Date | null;
   responsibilities: string[];
-  subjects: ISubject[];
+  subjects: (Types.ObjectId | ISubject)[];
 }
 
 const EducationSchema = new Schema<IEducation>({

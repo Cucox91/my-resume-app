@@ -15,5 +15,5 @@ export interface IEducation {
   fromDate: Date;
   toDate: Date | null;
   responsibilities: string[];
-  subject: ISubject[];
+  subjects: ISubject[];
 }

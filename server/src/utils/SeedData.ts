@@ -1,6 +1,8 @@
 import Experience, { IExperience } from "../models/mongoose/ExperienceModel";
 import Education, { IEducation } from "../models/mongoose/EducationModel";
+import Subject, { ISubject } from "../models/mongoose/SubjectModel";
 import Skill, { ConfidenceLevel, ISkill } from "../models/mongoose/SkillModel";
+import { HydratedDocument, Types } from "mongoose";
 
 export const seedExperiences = async () => {
   const experiences = [
@@ -98,7 +100,10 @@ export const seedEducation = async () => {
     },
   ];
 
-  await Education.insertMany(educations);
+  const insertedEducations = await Education.insertMany(educations);
+  const myUniversity = insertedEducations.find(e => e.school === "Havana University");
+
+  await seedUniversitySubjects(myUniversity);
 };
 
 export const seedSkills = async () => {
@@ -322,3 +327,29 @@ export const seedSkills = async () => {
   await Skill.insertMany(skills);
 };
 
+
+const seedUniversitySubjects = async (myUniversity: HydratedDocument<IEducation> | undefined) => {
+  if (myUniversity) {
+    const subjects = await Subject.insertMany([
+      {
+        name: "Programming",
+        description: "Computer Programming Fundamentals.",
+        semester: 1,
+        notes: ["We used C# as learning language."],
+        biography: ["Aprenda a Programar. Miguel Katrib Mora."],
+        Education: myUniversity.id
+      },
+      {
+        name: "Logics",
+        description: "From Set Theory to Predicate Logic.",
+        semester: 1,
+        notes: ["I strugled the first year of my career with this topic. But it worth it."],
+        biography: ["Introduccion a la Logica. Luciano Garcia Garrido."],
+        Education: myUniversity.id
+      }
+    ]);
+
+    myUniversity.subjects.push(...subjects.map(subject => subject._id as Types.ObjectId));
+    await myUniversity.save();
+  }
+}
