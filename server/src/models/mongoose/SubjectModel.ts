@@ -3,6 +3,14 @@ import { IBaseDocument } from "../IBaseDocument";
 import { BaseModel } from "./BaseModel";
 import { IEducation } from "./EducationModel";
 
+export interface IConcept {
+  title: string;
+  summary: string;
+  keyPoints: string[];
+  tags?: string[];
+  relatedApplications?: string[];
+}
+
 export interface ISubject extends IBaseDocument {
   id?: string | undefined;
   name: string;
@@ -11,6 +19,7 @@ export interface ISubject extends IBaseDocument {
   notes: string[];
   biography: string[];
   education: IEducation;
+  concepts: IConcept[];
 }
 
 const SubjectSchema = new Schema<ISubject>({
@@ -20,6 +29,15 @@ const SubjectSchema = new Schema<ISubject>({
   education: { type: Schema.Types.ObjectId, ref: "Education" },
   notes: { type: [String] },
   biography: { type: [String] },
+  concepts: [
+    {
+      title: { type: String, required: true },
+      summary: { type: String, required: true },
+      keyPoints: [{ type: String }],
+      tags: [{ type: String }],
+      relatedApplications: [{ type: String }],
+    },
+  ],
   ...BaseModel,
 });
 

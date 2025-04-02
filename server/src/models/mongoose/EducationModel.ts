@@ -11,6 +11,7 @@ export interface IEducation extends IBaseDocument {
   toDate?: Date | null;
   responsibilities: string[];
   subjects: (Types.ObjectId | ISubject)[];
+  generalNotes: string[];
 }
 
 const EducationSchema = new Schema<IEducation>({
@@ -20,6 +21,7 @@ const EducationSchema = new Schema<IEducation>({
   toDate: { type: Date },
   subjects: [{ type: Schema.Types.ObjectId, ref: "Subject" }],
   responsibilities: { type: [String] },
+  generalNotes: { type: [String] },
   ...BaseModel,
 });
 
