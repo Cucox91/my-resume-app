@@ -11,12 +11,15 @@ export const seedExperiences = async () => {
       company: "Florida Department of Transportation (FDOT)",
       fromDate: new Date("04-01-2022"),
       toDate: null,
+      teamSize: 20,
+      Location: "Miami, FL (Remote)",
       responsibilities: [
         "Developed the modernization of the Maintenance Rating Program (MRP) by transitioning it to a cloud-based solution, MRP2, which significantly reduced hosting and development costs while improving maintainability. This system integrates seamlessly with GIS and mobile platforms, enabling faster and more efficient inspections and reviews of state highway maintenance.",
         "Designed and implemented SunEx, an end-to-end real-time notification system for FDOT executives. This solution includes a web application, API integration with the State Sunguide System, and a mobile app built with the MERN stack and Expo React Native. SunEx provides real-time updates on incidents and car crashes, ensuring executives have up-to-date information.",
         "Developed the Procedural Document Library (PDL) to streamline document creation, review, and approval processes involving multiple stakeholders, including legal offices and high-ranking officials. The PDL replaced a convoluted SharePoint system, improving user permissions management and providing a clear document status history.",
         "Contributed to various maintenance projects, including bug fixes, small enhancements, and routine support tasks, ensuring system reliability and continuous improvement.",
       ],
+      achievements: ["Complete multiple projects with a tight deadline. (Example Text)"],
     },
     {
       title: "Software Architect Consultant",

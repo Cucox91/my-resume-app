@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 import { IBaseDocument } from "../IBaseDocument";
-import { IExperience } from "./ExperienceModel";
 import { BaseModel } from "./BaseModel";
 
 export enum ConfidenceLevel {

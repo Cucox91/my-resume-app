@@ -16,14 +16,10 @@ const ExperienceItem: React.FC<IProps> = (props: IProps) => {
       <Segment id={props.id!} key={props.id!} basic>
         <Header
           as={Link}
-          to={`/experiences/${props.id}`}
+          to={`/experience/${props.id}`}
           style={{ color: "inherit", textDecoration: "none" }}
-          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) =>
-            (e.currentTarget.style.color = "blue")
-          }
-          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) =>
-            (e.currentTarget.style.color = "inherit")
-          }
+          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "blue")}
+          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "inherit")}
         >
           {title} at {company}
           <Header.Subheader>

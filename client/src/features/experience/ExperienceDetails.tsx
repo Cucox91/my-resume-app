@@ -1,0 +1,115 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Container, Header, Icon, Item, ItemContent, ItemDescription, ItemGroup, ItemHeader } from "semantic-ui-react";
+import { getExperienceById } from "../../apis/experienceApi";
+import { IExperience } from "../../models/IExperience";
+import formatDate from "../../utils/DateAndTime";
+
+const ExperienceDetails: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [experience, setExperience] = useState<IExperience | null>(null);
+
+  useEffect(() => {
+    const fetchExperience = async () => {
+      try {
+        const experienceData = await getExperienceById(id!);
+        if (experienceData) {
+          setExperience(experienceData);
+        }
+      } catch (err: unknown) {
+        console.error("Error fetching experience by ID", err);
+      }
+    };
+    fetchExperience();
+  }, [id]);
+
+  return (
+    <>
+      {experience ? (
+        <Container>
+          <Header as="h1" textAlign="center" style={{ marginTop: "0.5rem", marginBottom: "3.0rem" }}>
+            <Header.Content>
+              <Icon name="briefcase" />
+              {experience.title} at {experience.company}
+            </Header.Content>
+            <Header.Subheader>
+              From {formatDate(experience.fromDate)} to {experience.toDate ? formatDate(experience.toDate) : "Present"}
+            </Header.Subheader>
+          </Header>
+
+          {experience.responsibilities.length > 0 && (
+              <ItemGroup divided>
+                <Header as="h3" dividing>
+                  Responsibilities
+                </Header>
+                {experience.responsibilities.map((resp, idx) => (
+                  <Item key={idx}>
+                    <ItemContent>
+                      <ItemDescription>{resp}</ItemDescription>
+                    </ItemContent>
+                  </Item>
+                ))}
+              </ItemGroup>
+            )}
+
+          {experience.teamSize && <Header as="h4">Team Size: {experience.teamSize}</Header>}
+
+          {experience.achievements!.length > 0 && (
+            <ItemGroup divided>
+              <Header as="h3" dividing>
+                Achievements
+              </Header>
+              {experience.achievements!.map((ach, idx) => (
+                <Item key={idx}>
+                  <ItemContent>
+                    <ItemDescription>{ach}</ItemDescription>
+                  </ItemContent>
+                </Item>
+              ))}
+            </ItemGroup>
+          )}
+
+          {experience.skills!.length > 0 && (
+            <ItemGroup divided>
+              <Header as="h3" dividing>
+                Skills
+              </Header>
+              <Item>
+                <ItemContent>
+                  <ItemDescription>{experience.skills!.join(", ")}</ItemDescription>
+                </ItemContent>
+              </Item>
+            </ItemGroup>
+          )}
+
+          {experience.projects!.length > 0 && (
+            <ItemGroup divided>
+              <Header as="h3" dividing>
+                Projects
+              </Header>
+              {experience.projects!.map((project, idx) => (
+                <Item key={idx}>
+                  <ItemContent>
+                    <ItemHeader>{project.name}</ItemHeader>
+                    {project.description && <ItemDescription>{project.description}</ItemDescription>}
+                    {project.skills?.length > 0 && (
+                      <ItemDescription>
+                        <strong>Skills:</strong> {project.skills.join(", ")}
+                      </ItemDescription>
+                    )}
+                  </ItemContent>
+                </Item>
+              ))}
+            </ItemGroup>
+          )}
+        </Container>
+      ) : (
+        <Header as="h1" textAlign="center">
+          <Icon name="briefcase" /> No Experience Found...
+        </Header>
+      )}
+    </>
+  );
+};
+
+export default ExperienceDetails;

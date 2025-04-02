@@ -12,13 +12,12 @@ import AdminDashboard from "./features/admin/AdminDashboard";
 import SkillDetails from "./features/skills/SkillDetails";
 import SkillTable from "./features/skills/SkillTable";
 import EducationDetails from "./features/education/EducationDetails";
+import ExperienceDetails from "./features/experience/ExperienceDetails";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <div
-        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-      >
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Header />
         {/* Main content area: grows to fill available space */}
         <div style={{ flex: 1, padding: "2em" }}>
@@ -30,7 +29,7 @@ const App: React.FC = () => {
             <Route path="/skill/:id" element={<SkillDetails />} />
             <Route path="/skill/" element={<SkillTable />} />
             <Route path="/education/:id" element={<EducationDetails />} />
-
+            <Route path="/experience/:id" element={<ExperienceDetails />} />
             <Route
               path="/admin"
               element={
