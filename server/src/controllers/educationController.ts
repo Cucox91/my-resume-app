@@ -1,19 +1,15 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import Education, { IEducation } from "../models/mongoose/EducationModel";
 import Subject, { ISubject } from "../models/mongoose/SubjectModel";
-import { seedEducation } from "../utils/SeedData";
+import { seedAllData } from "../utils/SeedData";
 
 // Retrieve all education
-export const getAllEducation: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getAllEducation: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const education = await Education.find();
 
     if (education.length === 0) {
-      await seedEducation();
+      await seedAllData();
     }
 
     res.json(education);
@@ -23,11 +19,7 @@ export const getAllEducation: RequestHandler = async (
 };
 
 // Retrieve a single education by ID
-export const getEducation: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getEducation: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const education = await Education.findById(id).populate({
@@ -44,11 +36,7 @@ export const getEducation: RequestHandler = async (
 };
 
 // Create a new education
-export const createEducation: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const createEducation: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const newEducation: IEducation = new Education(req.body);
     const savedEducation = await newEducation.save();
@@ -59,11 +47,7 @@ export const createEducation: RequestHandler = async (
 };
 
 // Update an existing education by ID
-export const updateEducation: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const updateEducation: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const updatedEducation = await Education.findByIdAndUpdate(id, req.body, {
@@ -79,11 +63,7 @@ export const updateEducation: RequestHandler = async (
 };
 
 // Delete an education by ID
-export const deleteEducation: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const deleteEducation: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const deletedEducation = await Education.findByIdAndDelete(id);

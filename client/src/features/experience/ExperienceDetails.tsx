@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Container, Header, Icon, Item, ItemContent, ItemDescription, ItemGroup, ItemHeader, Label } from "semantic-ui-react";
+import { Container, Divider, Header, Icon, Item, ItemContent, ItemDescription, ItemGroup, ItemHeader, Label, Segment, SegmentGroup } from "semantic-ui-react";
 import { getExperienceById } from "../../apis/experienceApi";
 import { IExperience } from "../../models/IExperience";
 import formatDate from "../../utils/DateAndTime";
@@ -37,23 +37,6 @@ const ExperienceDetails: React.FC = () => {
             </Header.Subheader>
           </Header>
 
-          {experience.responsibilities.length > 0 && (
-            <ItemGroup divided>
-              <Header as="h3" dividing>
-                Responsibilities
-              </Header>
-              {experience.responsibilities.map((resp, idx) => (
-                <Item key={idx}>
-                  <ItemContent>
-                    <ItemDescription>{resp}</ItemDescription>
-                  </ItemContent>
-                </Item>
-              ))}
-            </ItemGroup>
-          )}
-
-          {experience.teamSize && <Header as="h4">Team Size: {experience.teamSize}</Header>}
-
           {experience.achievements!.length > 0 && (
             <ItemGroup divided>
               <Header as="h3" dividing>
@@ -63,6 +46,21 @@ const ExperienceDetails: React.FC = () => {
                 <Item key={idx}>
                   <ItemContent>
                     <ItemDescription>{ach}</ItemDescription>
+                  </ItemContent>
+                </Item>
+              ))}
+            </ItemGroup>
+          )}
+
+          {experience.responsibilities.length > 0 && (
+            <ItemGroup divided>
+              <Header as="h3" dividing>
+                Responsibilities
+              </Header>
+              {experience.responsibilities.map((resp, idx) => (
+                <Item key={idx}>
+                  <ItemContent>
+                    <ItemDescription>{resp}</ItemDescription>
                   </ItemContent>
                 </Item>
               ))}
@@ -100,9 +98,10 @@ const ExperienceDetails: React.FC = () => {
                     {project.description && <ItemDescription>{project.description}</ItemDescription>}
                     {project.skills?.length > 0 && (
                       <ItemDescription>
-                        <strong>Skills:</strong>{" "}
+                        {/* Raziel: Make this look better later.*/}
+                        <strong style={{ textAlign: "center" }}>Skills:</strong>
                         {project.skills.map((s) => (
-                          <Label as={Link} to={`/skill/${s._id}`}>
+                          <Label as={Link} to={`/skill/${s._id}`} style={{ margin: "0.3rem" }}>
                             {s.name}
                           </Label>
                         ))}
@@ -113,6 +112,20 @@ const ExperienceDetails: React.FC = () => {
               ))}
             </ItemGroup>
           )}
+
+          <Divider horizontal>Other Details</Divider>
+          <SegmentGroup horizontal>
+            {experience.teamSize && (
+              <Segment textAlign="center">
+                <Header as="h4">Team Size: {experience.teamSize}</Header>
+              </Segment>
+            )}
+            {experience.location && (
+              <Segment textAlign="center">
+                <Header as="h4">Location: {experience.location}</Header>
+              </Segment>
+            )}
+          </SegmentGroup>
         </Container>
       ) : (
         <Header as="h1" textAlign="center">

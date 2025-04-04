@@ -1,18 +1,14 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import Skill, { ISkill } from "../models/mongoose/SkillModel";
-import { seedSkills } from "../utils/SeedData";
+import { seedAllData } from "../utils/SeedData";
 
 // Retrieve all skills
-export const getAllSkills: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getAllSkills: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const skills = await Skill.find();
 
     if (skills.length === 0) {
-      await seedSkills();
+      await seedAllData();
     }
 
     res.json(skills);
@@ -22,11 +18,7 @@ export const getAllSkills: RequestHandler = async (
 };
 
 // Retrieve a single skills by ID
-export const getSkill: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getSkill: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const skills = await Skill.findById(id);
@@ -40,11 +32,7 @@ export const getSkill: RequestHandler = async (
 };
 
 // Create a new skills
-export const createSkill: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const createSkill: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const newSkill: ISkill = new Skill(req.body);
     const savedSkill = await newSkill.save();
@@ -55,11 +43,7 @@ export const createSkill: RequestHandler = async (
 };
 
 // Update an existing skills by ID
-export const updateSkill: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const updateSkill: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const updatedSkill = await Skill.findByIdAndUpdate(id, req.body, {
@@ -75,11 +59,7 @@ export const updateSkill: RequestHandler = async (
 };
 
 // Delete an skills by ID
-export const deleteSkill: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const deleteSkill: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const deletedSkill = await Skill.findByIdAndDelete(id);

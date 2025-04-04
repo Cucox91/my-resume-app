@@ -4,7 +4,24 @@ import Subject, { ISubject } from "../models/mongoose/SubjectModel";
 import Skill, { ConfidenceLevel, ISkill } from "../models/mongoose/SkillModel";
 import { HydratedDocument, Types } from "mongoose";
 
-export const seedExperiences = async () => {
+export const seedAllData = async () => {
+  const skillsCount = await Skill.countDocuments();
+  if (skillsCount === 0) {
+    await seedSkills();
+  }
+
+  const experiencesCount = await Experience.countDocuments();
+  if (experiencesCount === 0) {
+    await seedExperiences();
+  }
+
+  const educationCount = await Education.countDocuments();
+  if (educationCount === 0) {
+    await seedEducation();
+  }
+};
+
+const seedExperiences = async () => {
   const experiences = [
     {
       title: "Software Engineer Consultant",
@@ -14,20 +31,60 @@ export const seedExperiences = async () => {
       teamSize: 20,
       Location: "Miami, FL (Remote)",
       responsibilities: [
-        "Developed the modernization of the Maintenance Rating Program (MRP) by transitioning it to a cloud-based solution, MRP2, which significantly reduced hosting and development costs while improving maintainability. This system integrates seamlessly with GIS and mobile platforms, enabling faster and more efficient inspections and reviews of state highway maintenance.",
-        "Designed and implemented SunEx, an end-to-end real-time notification system for FDOT executives. This solution includes a web application, API integration with the State Sunguide System, and a mobile app built with the MERN stack and Expo React Native. SunEx provides real-time updates on incidents and car crashes, ensuring executives have up-to-date information.",
-        "Developed the Procedural Document Library (PDL) to streamline document creation, review, and approval processes involving multiple stakeholders, including legal offices and high-ranking officials. The PDL replaced a convoluted SharePoint system, improving user permissions management and providing a clear document status history.",
-        "Contributed to various maintenance projects, including bug fixes, small enhancements, and routine support tasks, ensuring system reliability and continuous improvement.",
+        "Create, Maintain and Imporve the department's codebase.",
+        "Support the Software Architects on their desicion taking during the planning of new project.",
+        "Take care of the CI/CD Workflow for the projects assigned to me.",
       ],
       projects: [
         {
           name: "MRP2",
           description: "Modernization of an old Mainframe Project that takes care of the public road's inspections in the state of Florida.",
-          skillNames: ["C#", ".NET", "Blazor", "HTMX", "ASP.NET Core", "Entity Framework Core", "Tailwind CSS"],
+          skillNames: ["C#", ".NET", "Blazor", "HTMX", "ASP.NET Core", "Entity Framework Core", "Tailwind CSS", "MSSQL", "T-SQL"],
+        },
+        {
+          name: "SunEx",
+          description: "Modern Mobile and Web Applications to allow the FDOT Executive to be aware of events occuring on the Florida Highways in real time.",
+          skillNames: [
+            "Expo",
+            "React Native",
+            "Microsoft App Center",
+            "TypeScript",
+            "Mongo DB",
+            "Express",
+            "React",
+            "Node",
+            "Mongoose",
+            "Microsoft Entra",
+            "Axios",
+            "Bootstrap",
+            "Kendo UI",
+            "Firebase",
+            "Docker",
+          ],
+        },
+        {
+          name: "PDL",
+          description:
+            "Procedural Document Library is a Web Project that Enables different levels of the organization to create Procedures, Forms and other types of documents and keep the involved parties aware of each stage of the document creation and approval.",
+          skillNames: ["TypeScript", "Mongo DB", "Express", "React", "Node", "Mongoose", "Microsoft Entra", "Axios", "Bootstrap", "Kendo UI", "Firebase", "Docker"],
+        },
+        {
+          name: "Multiple Projects Maintenance",
+          description: "Maintenance and new Features addition of different Kind of Projects inside the Department.",
+          skillNames: ["TypeScript", "T-SQL", "Angular", "Kendo UI", "ASP.NET Core", "MSSQL"],
         },
       ],
-      achievements: ["Complete multiple projects with a tight deadline. (Example Text)"],
-      skillNames: ["C#", "Blazor", "Postman", "Docker", "Azure"],
+      achievements: [
+        "Developed the modernization of the Maintenance Rating Program (MRP) by transitioning it to a cloud-based solution, MRP2, which significantly reduced hosting and development costs while improving maintainability. This system integrates seamlessly with GIS and mobile platforms, enabling faster and more efficient inspections and reviews of state highway maintenance.",
+        "Designed and implemented SunEx, an end-to-end real-time notification system for FDOT executives. This solution includes a web application, API integration with the State Sunguide System, and a mobile app built with the MERN stack and Expo React Native. SunEx provides real-time updates on incidents and car crashes, ensuring executives have up-to-date information.",
+        "Developed the Procedural Document Library (PDL) to streamline document creation, review, and approval processes involving multiple stakeholders, including legal offices and high-ranking officials. The PDL replaced a convoluted SharePoint system, improving user permissions management and providing a clear document status history.",
+        "Contributed to various maintenance projects, including bug fixes, small enhancements, and routine support tasks, ensuring system reliability and continuous improvement.",
+        "Helped the Department to speed up the creation, evaluation and approval of the organization's Documents, Policies and Forms.",
+        "Supported the Executive Branch on their desicion taking in real time.",
+        "Improved the quality if our beautifull state of Florida roads and infrastructure.",
+        "Keept services working with a minimum or no downtime by addressing issues on our codebase.",
+      ],
+      skillNames: ["Postman", "Azure", "Azure DevOps", "YAML", "Agile"],
     },
     {
       title: "Software Architect Consultant",
@@ -88,7 +145,7 @@ export const seedExperiences = async () => {
   }
 };
 
-export const seedSkills = async () => {
+const seedSkills = async () => {
   const skills = [
     // Languages:
     {
@@ -110,7 +167,7 @@ export const seedSkills = async () => {
       confidence: ConfidenceLevel.High,
     },
     {
-      name: "JavScript",
+      name: "JavaScript",
       description: "Used with the MERN Stack Mainly.",
       yearsOfProffesionalExperience: 11,
       yearsOfIndividualExperience: 11,
@@ -151,6 +208,16 @@ export const seedSkills = async () => {
       ],
       confidence: ConfidenceLevel.Beginner,
     },
+    {
+      name: "YAML",
+      description: "Used in Azure Pipelines, Github Actions, Docker, etc.",
+      yearsOfProffesionalExperience: 6,
+      yearsOfIndividualExperience: 6,
+      yearLastUse: 2025,
+      notes: ["I know, I know, calling YAML a language is the same as calling HTML one."],
+      confidence: ConfidenceLevel.Beginner,
+    },
+
     // Frameworks and Tools:
     {
       name: "Blazor",
@@ -160,15 +227,6 @@ export const seedSkills = async () => {
       yearLastUse: 2025,
       notes: [],
       confidence: ConfidenceLevel.Beginner,
-    },
-    {
-      name: "React",
-      description: "Currently using it for Personal Projects. But have used it professionally several times in the past years. ",
-      yearsOfProffesionalExperience: 6,
-      yearsOfIndividualExperience: 6,
-      yearLastUse: 2025,
-      notes: [],
-      confidence: ConfidenceLevel.High,
     },
     {
       name: "React",
@@ -278,12 +336,153 @@ export const seedSkills = async () => {
       notes: ["I want to learn more from this amazing tool."],
       confidence: ConfidenceLevel.Beginner,
     },
+    {
+      name: "Axios",
+      description: "When using the MERN Stack I want to keep all my api calls in one file per feature. There is nothing easier than rely on axios to handle the calls.",
+      yearsOfProffesionalExperience: 6,
+      yearsOfIndividualExperience: 6,
+      yearLastUse: 2025,
+      notes: ["I always create a base config file for axios and make the api calls from different files to call this config file first."],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Kendo UI",
+      description:
+        "It makes your life easier... until you need something that the components doesn't allow. In this case two things happens. Either you spend hours reading the documentation for weird workarrounds. Or you create a custom component by yourself.",
+      yearsOfProffesionalExperience: 6,
+      yearsOfIndividualExperience: 6,
+      yearLastUse: 2025,
+      notes: ["Have used the JQuery, Angular and React Versions. And honestly, I like the React one the most."],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "Docker",
+      description: "Making my life easier for a while. I hope I can learn a lot more from this amazing tool.",
+      yearsOfProffesionalExperience: 5,
+      yearsOfIndividualExperience: 5,
+      yearLastUse: 2025,
+      notes: [
+        "For me there is nothing better than keep a database with their respective Image, Container and Volume on my local environment without having it running and consuming memory on the background. Just Play and Pause when needed.",
+      ],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Expo",
+      description: "Used to create and emulate React Native Mobile Apps.",
+      yearsOfProffesionalExperience: 2,
+      yearsOfIndividualExperience: 2,
+      yearLastUse: 2024,
+      notes: [
+        "I think is an incredible usefull and fun ecosystem. Sadly I haven't used too many of it's feature outside of it.",
+        "Struggled a lot to make work background processes in mobile with it.",
+      ],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "React Native",
+      description: "Allowed me to create Mobile Apps UIs for Android and iOS.",
+      yearsOfProffesionalExperience: 2,
+      yearsOfIndividualExperience: 2,
+      yearLastUse: 2024,
+      notes: [],
+      confidence: ConfidenceLevel.Beginner,
+    },
+
+    // Database
+    {
+      name: "T-SQL",
+      description: "My beloved Relational Database Langauge of choise.",
+      yearsOfProffesionalExperience: 10,
+      yearsOfIndividualExperience: 10,
+      yearLastUse: 2025,
+      notes: ["Have worked for several years with T-SQL. Recently I feel I have lost some of my skills in this language because the intesive use of ORMs."],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "MSSQL",
+      description: "My beloved Relational Database Server of choise.",
+      yearsOfProffesionalExperience: 10,
+      yearsOfIndividualExperience: 10,
+      yearLastUse: 2025,
+      notes: [
+        "Have worked for several years with T-SQL. Recently I feel I have lost some of my skills in this language because the intesive use of ORMs.",
+        "recently using a lot MSSQL Server inside a Docker Container. Kudos to the Creator of this marvel.",
+      ],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Mongo DB",
+      description: "Have been using this Document type Database for a while.",
+      yearsOfProffesionalExperience: 5,
+      yearsOfIndividualExperience: 5,
+      yearLastUse: 2025,
+      notes: ["Very useful in most of the scenarios.", "Initially was difficult to me to do queries to it, but with use I learned to work on it."],
+      confidence: ConfidenceLevel.Medium,
+    },
+
+    // Services
+    {
+      name: "Microsoft Entra",
+      description: "Formrly Azure AD, using it to allow Authentication and Authorization based on the permissions assigned to users by groups and applications.",
+      yearsOfProffesionalExperience: 3,
+      yearsOfIndividualExperience: 3,
+      yearLastUse: 2025,
+      notes: ["We have a wrapper Library that reduces our effort every time we need to create a project."],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Azure",
+      description: "This have been my cloud hosting platform for many many years.",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2025,
+      notes: ["A desire that I currently have is to learn a little bit about AWS to keep myself open to a different shop outside the Microsoft Ecosystem."],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Azure DevOps",
+      description: "Have been using most of the features for several years.",
+      yearsOfProffesionalExperience: 6,
+      yearsOfIndividualExperience: 6,
+      yearLastUse: 2025,
+      notes: ['Have used the Azure Repos for a while on my personal projects. Recently I have moved back to Github. At the end they belong to the same "person".'],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Microsoft App Center",
+      description: "Used mostly for the CI/CD of Mobile Applications.",
+      yearsOfProffesionalExperience: 2,
+      yearsOfIndividualExperience: 2,
+      yearLastUse: 2024,
+      notes: ["I just want to say that I'm happy they discontinued it."],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "Fireabase",
+      description: "Used mostly to send Notifications to iOS and Android.",
+      yearsOfProffesionalExperience: 2,
+      yearsOfIndividualExperience: 2,
+      yearLastUse: 2024,
+      notes: [""],
+      confidence: ConfidenceLevel.Beginner,
+    },
+
+    // Methodologies, and Global Skills
+    {
+      name: "Agile",
+      description: "For a few years all the org that I have belong to have used Agile Methodologies with Scrum.",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2025,
+      notes: [""],
+      confidence: ConfidenceLevel.Medium,
+    },
   ];
 
   await Skill.insertMany(skills);
 };
 
-export const seedEducation = async () => {
+const seedEducation = async () => {
   const educations = [
     {
       title: "B.Sc. Computer Sciences",
