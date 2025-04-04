@@ -14,7 +14,7 @@ const ExperienceList: React.FC = () => {
         if (experiencesFromServer) {
           setExperiences(experiencesFromServer);
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.log("Error Retrieving the Experiences");
         console.log(err);
       }

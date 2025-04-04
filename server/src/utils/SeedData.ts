@@ -19,7 +19,15 @@ export const seedExperiences = async () => {
         "Developed the Procedural Document Library (PDL) to streamline document creation, review, and approval processes involving multiple stakeholders, including legal offices and high-ranking officials. The PDL replaced a convoluted SharePoint system, improving user permissions management and providing a clear document status history.",
         "Contributed to various maintenance projects, including bug fixes, small enhancements, and routine support tasks, ensuring system reliability and continuous improvement.",
       ],
+      projects: [
+        {
+          name: "MRP2",
+          description: "Modernization of an old Mainframe Project that takes care of the public road's inspections in the state of Florida.",
+          skillNames: ["C#", ".NET", "Blazor", "HTMX", "ASP.NET Core", "Entity Framework Core", "Tailwind CSS"],
+        },
+      ],
       achievements: ["Complete multiple projects with a tight deadline. (Example Text)"],
+      skillNames: ["C#", "Blazor", "Postman", "Docker", "Azure"],
     },
     {
       title: "Software Architect Consultant",
@@ -74,7 +82,10 @@ export const seedExperiences = async () => {
       ],
     },
   ];
-  await Experience.insertMany(experiences);
+
+  if (experiences.length > 0) {
+    await seedExperienceSkillsAndSave(experiences);
+  }
 };
 
 export const seedSkills = async () => {
@@ -1110,5 +1121,57 @@ const seedUniversitySubjects = async (myUniversity: HydratedDocument<IEducation>
 
     myUniversity.subjects.push(...subjects.map((subject) => subject._id as Types.ObjectId));
     await myUniversity.save();
+  }
+};
+
+const seedExperienceSkillsAndSave = async (myExperiences: any) => {
+  // Get all Skills.
+  const allSkills = await Skill.find();
+
+  // Create a Dictionary of skills name and id.
+  const skillMap = new Map<string, Types.ObjectId>();
+  allSkills.forEach((skill) => skillMap.set(skill.name.toLowerCase(), skill.id));
+
+  // Add Skills Model to correct property.
+  for (const exp of myExperiences!) {
+    const anyExp = exp as any;
+    if (anyExp.skillNames) {
+      exp.skills = anyExp.skillNames.map((name: string) => skillMap.get(name.toLowerCase())).filter((id: any): id is Types.ObjectId => !!id);
+      delete anyExp.skillNames;
+    }
+
+    exp.projects?.forEach((proj: any) => {
+      if (proj.skillNames) {
+        proj.skills = proj.skillNames.map((name: string) => skillMap.get(name.toLowerCase())).filter((id: any): id is Types.ObjectId => !!id);
+        delete proj.skillNames;
+      }
+    });
+  }
+
+  // Save Experiences
+  const savedExperiences = await Experience.insertMany(myExperiences);
+
+  // Add experiences to skills now.
+  for (const exp of savedExperiences) {
+    const skillIds = new Set<string>();
+
+    // Add direct experience skills
+    exp.skills?.forEach((id: any) => skillIds.add(id.toString()));
+
+    // Add skills from projects
+    exp.projects?.forEach((project: any) => {
+      project.skills?.forEach((id: any) => skillIds.add(id.toString()));
+    });
+
+    for (const skillId of skillIds) {
+      const skill = await Skill.findById(skillId);
+      if (skill) {
+        const alreadyLinked = skill.experiences.some((eId) => eId.toString() === exp._id.toString());
+        if (!alreadyLinked) {
+          skill.experiences.push(exp._id);
+          await skill.save();
+        }
+      }
+    }
   }
 };

@@ -3,13 +3,9 @@ import Experience, { IExperience } from "../models/mongoose/ExperienceModel";
 import { seedExperiences } from "../utils/SeedData";
 
 // Retrieve all experiences
-export const getAllExperiences: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getAllExperiences: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const experiences = await Experience.find();
+    const experiences = await Experience.find().sort({ fromDate: -1 });
     if (experiences.length == 0) {
       await seedExperiences();
     }
@@ -21,14 +17,11 @@ export const getAllExperiences: RequestHandler = async (
 };
 
 // Retrieve a single experience by ID
-export const getExperience: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const getExperience: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const experience = await Experience.findById(id);
+    const experience = await Experience.findById(id).populate({ path: "skills", model: "Skill" }).populate("projects").populate({ path: "projects.skills", model: "Skill" });
+
     if (!experience) {
       res.status(404).json({ message: "Experience not found" });
     }
@@ -39,11 +32,7 @@ export const getExperience: RequestHandler = async (
 };
 
 // Create a new experience
-export const createExperience: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const createExperience: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const newExperience: IExperience = new Experience(req.body);
     const savedExperience = await newExperience.save();
@@ -54,11 +43,7 @@ export const createExperience: RequestHandler = async (
 };
 
 // Update an existing experience by ID
-export const updateExperience: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const updateExperience: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const updatedExperience = await Experience.findByIdAndUpdate(id, req.body, {
@@ -74,11 +59,7 @@ export const updateExperience: RequestHandler = async (
 };
 
 // Delete an experience by ID
-export const deleteExperience: RequestHandler = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const deleteExperience: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const deletedExperience = await Experience.findByIdAndDelete(id);

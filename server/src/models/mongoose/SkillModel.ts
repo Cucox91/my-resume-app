@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { IBaseDocument } from "../IBaseDocument";
 import { BaseModel } from "./BaseModel";
+import { IExperience } from "./ExperienceModel";
 
 export enum ConfidenceLevel {
   Beginner = "beginner",
@@ -17,6 +18,7 @@ export interface ISkill extends IBaseDocument {
   yearsOfIndividualExperience: number;
   yearLastUse: number;
   notes: string[];
+  experiences: IExperience[];
 }
 
 const SkillSchema = new Schema<ISkill>({
@@ -31,6 +33,7 @@ const SkillSchema = new Schema<ISkill>({
     enum: Object.values(ConfidenceLevel),
     required: true,
   },
+  experiences: [{ type: Schema.Types.ObjectId, ref: "Experience" }],
   ...BaseModel,
 });
 

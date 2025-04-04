@@ -1,3 +1,5 @@
+import { ISkill } from "./ISkill";
+
 export interface IExperience {
   _id?: string | undefined;
   title: string;
@@ -8,10 +10,10 @@ export interface IExperience {
   location?: string;
   teamSize?: number;
   achievements?: string[];
-  skills?: string[];
+  skills?: ISkill[];
   projects?: {
     name: string;
     description?: string;
-    skills: string[];
+    skills: ISkill[];
   }[];
 }

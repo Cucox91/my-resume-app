@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Header, Icon, Item, ItemContent, ItemDescription, ItemGroup, ItemHeader } from "semantic-ui-react";
+import { Link, useParams } from "react-router-dom";
+import { Container, Header, Icon, Item, ItemContent, ItemDescription, ItemGroup, ItemHeader, Label } from "semantic-ui-react";
 import { getExperienceById } from "../../apis/experienceApi";
 import { IExperience } from "../../models/IExperience";
 import formatDate from "../../utils/DateAndTime";
@@ -38,19 +38,19 @@ const ExperienceDetails: React.FC = () => {
           </Header>
 
           {experience.responsibilities.length > 0 && (
-              <ItemGroup divided>
-                <Header as="h3" dividing>
-                  Responsibilities
-                </Header>
-                {experience.responsibilities.map((resp, idx) => (
-                  <Item key={idx}>
-                    <ItemContent>
-                      <ItemDescription>{resp}</ItemDescription>
-                    </ItemContent>
-                  </Item>
-                ))}
-              </ItemGroup>
-            )}
+            <ItemGroup divided>
+              <Header as="h3" dividing>
+                Responsibilities
+              </Header>
+              {experience.responsibilities.map((resp, idx) => (
+                <Item key={idx}>
+                  <ItemContent>
+                    <ItemDescription>{resp}</ItemDescription>
+                  </ItemContent>
+                </Item>
+              ))}
+            </ItemGroup>
+          )}
 
           {experience.teamSize && <Header as="h4">Team Size: {experience.teamSize}</Header>}
 
@@ -72,11 +72,17 @@ const ExperienceDetails: React.FC = () => {
           {experience.skills!.length > 0 && (
             <ItemGroup divided>
               <Header as="h3" dividing>
-                Skills
+                General Skills
               </Header>
               <Item>
                 <ItemContent>
-                  <ItemDescription>{experience.skills!.join(", ")}</ItemDescription>
+                  <ItemDescription>
+                    {experience.skills!.map((s) => (
+                      <Label as={Link} to={`/skill/${s._id}`}>
+                        {s.name}
+                      </Label>
+                    ))}
+                  </ItemDescription>
                 </ItemContent>
               </Item>
             </ItemGroup>
@@ -94,7 +100,12 @@ const ExperienceDetails: React.FC = () => {
                     {project.description && <ItemDescription>{project.description}</ItemDescription>}
                     {project.skills?.length > 0 && (
                       <ItemDescription>
-                        <strong>Skills:</strong> {project.skills.join(", ")}
+                        <strong>Skills:</strong>{" "}
+                        {project.skills.map((s) => (
+                          <Label as={Link} to={`/skill/${s._id}`}>
+                            {s.name}
+                          </Label>
+                        ))}
                       </ItemDescription>
                     )}
                   </ItemContent>
