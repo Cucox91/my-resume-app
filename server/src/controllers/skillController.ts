@@ -15,7 +15,7 @@ export const getAllSkills: RequestHandler = async (req: Request, res: Response, 
 export const getSkill: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
-    const skills = await Skill.findById(id);
+    const skills = await Skill.findById(id).populate("experiences");
     if (!skills) {
       res.status(404).json({ message: "Skill not found" });
     }
