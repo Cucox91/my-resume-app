@@ -1,17 +1,11 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import Education, { IEducation } from "../models/mongoose/EducationModel";
 import Subject, { ISubject } from "../models/mongoose/SubjectModel";
-import { seedAllData } from "../utils/SeedData";
 
 // Retrieve all education
 export const getAllEducation: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const education = await Education.find();
-
-    if (education.length === 0) {
-      await seedAllData();
-    }
-
     res.json(education);
   } catch (error) {
     next(error);

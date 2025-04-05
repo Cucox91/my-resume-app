@@ -1,15 +1,10 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import Experience, { IExperience } from "../models/mongoose/ExperienceModel";
-import { seedAllData } from "../utils/SeedData";
 
 // Retrieve all experiences
 export const getAllExperiences: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const experiences = await Experience.find().sort({ fromDate: -1 });
-    if (experiences.length == 0) {
-      await seedAllData();
-    }
-
     res.json(experiences);
   } catch (error) {
     next(error);

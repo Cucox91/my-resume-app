@@ -7,6 +7,7 @@ import authRoutes from "./routes/authRoutes";
 import experienceRoute from "./routes/experienceRoute";
 import educationRoute from "./routes/educationRoute";
 import skillRoute from "./routes/skillRoute";
+import { seedAllData } from "./utils/SeedData";
 
 dotenv.config();
 
@@ -38,5 +39,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/experiences", experienceRoute);
 app.use("/api/education", educationRoute);
 app.use("/api/skills", skillRoute);
+
+if (process.env.SEED_DATA === "true") {
+  seedAllData();
+}
 
 export default app;

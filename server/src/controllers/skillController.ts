@@ -1,16 +1,10 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import Skill, { ISkill } from "../models/mongoose/SkillModel";
-import { seedAllData } from "../utils/SeedData";
 
 // Retrieve all skills
 export const getAllSkills: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const skills = await Skill.find();
-
-    if (skills.length === 0) {
-      await seedAllData();
-    }
-
     res.json(skills);
   } catch (error) {
     next(error);

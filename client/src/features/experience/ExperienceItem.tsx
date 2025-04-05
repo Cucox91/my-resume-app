@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const ExperienceItem: React.FC<IProps> = (props: IProps) => {
-  const { company, title, fromDate, toDate, responsibilities } = props.item;
+  const { company, title, fromDate, toDate, achievements } = props.item;
   return (
     <>
       <Segment id={props.id!} key={props.id!} basic>
@@ -27,7 +27,7 @@ const ExperienceItem: React.FC<IProps> = (props: IProps) => {
           </Header.Subheader>
         </Header>
         <List bulleted>
-          {responsibilities.map((r, index) => (
+          {achievements!.map((r, index) => (
             <List.Item id={index} key={index}>
               {r}
             </List.Item>

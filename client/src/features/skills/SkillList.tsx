@@ -25,9 +25,12 @@ const SkillList: React.FC = () => {
   if (skills) {
     return (
       <Container textAlign="center">
-        {skills.map((s) => (
-          <SkillItem id={s._id!} key={s._id!} item={s} />
-        ))}
+        {skills
+          .sort((a, b) => b.yearLastUse - a.yearLastUse)
+          .slice(0, 20)
+          .map((s) => (
+            <SkillItem id={s._id!} key={s._id!} item={s} />
+          ))}
       </Container>
     );
   } else {

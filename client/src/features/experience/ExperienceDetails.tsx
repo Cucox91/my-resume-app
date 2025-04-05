@@ -32,88 +32,110 @@ const ExperienceDetails: React.FC = () => {
               <Icon name="briefcase" />
               {experience.title} at {experience.company}
             </Header.Content>
-            <Header.Subheader>
+            <Header.Subheader style={{ marginTop: "0.5rem", marginBottom: "3.0rem" }}>
               From {formatDate(experience.fromDate)} to {experience.toDate ? formatDate(experience.toDate) : "Present"}
             </Header.Subheader>
           </Header>
 
           {experience.achievements!.length > 0 && (
-            <ItemGroup divided>
-              <Header as="h3" dividing>
+            <>
+              <Divider></Divider>
+              <Divider as="h3" dividing horizontal textAlign="center">
                 Achievements
-              </Header>
-              {experience.achievements!.map((ach, idx) => (
-                <Item key={idx}>
-                  <ItemContent>
-                    <ItemDescription>{ach}</ItemDescription>
-                  </ItemContent>
-                </Item>
-              ))}
-            </ItemGroup>
+              </Divider>
+              <Divider></Divider>
+
+              <ItemGroup divided>
+                {experience.achievements!.map((ach, idx) => (
+                  <Item key={idx}>
+                    <ItemContent>
+                      <ItemDescription>{ach}</ItemDescription>
+                    </ItemContent>
+                  </Item>
+                ))}
+              </ItemGroup>
+            </>
           )}
 
           {experience.responsibilities.length > 0 && (
-            <ItemGroup divided>
-              <Header as="h3" dividing>
+            <>
+              <Divider></Divider>
+              <Divider as="h3" dividing horizontal textAlign="center">
                 Responsibilities
-              </Header>
-              {experience.responsibilities.map((resp, idx) => (
-                <Item key={idx}>
-                  <ItemContent>
-                    <ItemDescription>{resp}</ItemDescription>
-                  </ItemContent>
-                </Item>
-              ))}
-            </ItemGroup>
+              </Divider>
+              <Divider></Divider>
+              <ItemGroup divided>
+                {experience.responsibilities.map((resp, idx) => (
+                  <Item key={idx}>
+                    <ItemContent>
+                      <ItemDescription>{resp}</ItemDescription>
+                    </ItemContent>
+                  </Item>
+                ))}
+              </ItemGroup>
+            </>
           )}
 
           {experience.skills!.length > 0 && (
-            <ItemGroup divided>
-              <Header as="h3" dividing>
+            <>
+              <Divider></Divider>
+              <Divider as="h3" dividing horizontal textAlign="center">
                 General Skills
-              </Header>
-              <Item>
-                <ItemContent>
-                  <ItemDescription>
-                    {experience.skills!.map((s) => (
-                      <Label as={Link} to={`/skill/${s._id}`}>
-                        {s.name}
-                      </Label>
-                    ))}
-                  </ItemDescription>
-                </ItemContent>
-              </Item>
-            </ItemGroup>
+              </Divider>
+              <Divider></Divider>
+
+              <ItemGroup divided>
+                <Item>
+                  <ItemContent>
+                    <ItemDescription>
+                      {experience.skills!.map((s) => (
+                        <Label as={Link} to={`/skill/${s._id}`}>
+                          {s.name}
+                        </Label>
+                      ))}
+                    </ItemDescription>
+                  </ItemContent>
+                </Item>
+              </ItemGroup>
+            </>
           )}
 
           {experience.projects!.length > 0 && (
-            <ItemGroup divided>
-              <Header as="h3" dividing>
+            <>
+              <Divider></Divider>
+              <Divider as="h3" dividing horizontal textAlign="center">
                 Projects
-              </Header>
-              {experience.projects!.map((project, idx) => (
-                <Item key={idx}>
-                  <ItemContent>
-                    <ItemHeader>{project.name}</ItemHeader>
-                    {project.description && <ItemDescription>{project.description}</ItemDescription>}
-                    {project.skills?.length > 0 && (
-                      <ItemDescription>
-                        {/* Raziel: Make this look better later.*/}
-                        <strong style={{ textAlign: "center" }}>Skills:</strong>
-                        {project.skills.map((s) => (
-                          <Label as={Link} to={`/skill/${s._id}`} style={{ margin: "0.3rem" }}>
-                            {s.name}
-                          </Label>
-                        ))}
-                      </ItemDescription>
-                    )}
-                  </ItemContent>
-                </Item>
-              ))}
-            </ItemGroup>
+              </Divider>
+              <Divider></Divider>
+              <ItemGroup divided>
+                {experience.projects!.map((project, idx) => (
+                  <Item key={idx}>
+                    <ItemContent>
+                      <ItemHeader>{project.name}</ItemHeader>
+                      {project.description && <ItemDescription>{project.description}</ItemDescription>}
+                      {project.skills?.length > 0 && (
+                        <ItemDescription>
+                          {/* Raziel: Make this look better later.*/}
+                          <strong style={{ textAlign: "center" }}>Skills:</strong>
+                          {project.skills.map((s) => (
+                            <Label as={Link} to={`/skill/${s._id}`} style={{ margin: "0.3rem" }}>
+                              {s.name}
+                            </Label>
+                          ))}
+                        </ItemDescription>
+                      )}
+                    </ItemContent>
+                  </Item>
+                ))}
+              </ItemGroup>
+            </>
           )}
 
-          <Divider horizontal>Other Details</Divider>
+          <Divider></Divider>
+          <Divider as="h3" dividing horizontal textAlign="center">
+            Other Details
+          </Divider>
+          <Divider></Divider>
           <SegmentGroup horizontal>
             {experience.teamSize && (
               <Segment textAlign="center">

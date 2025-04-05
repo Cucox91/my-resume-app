@@ -5,24 +5,39 @@ import Skill, { ConfidenceLevel, ISkill } from "../models/mongoose/SkillModel";
 import { HydratedDocument, Types } from "mongoose";
 
 export const seedAllData = async () => {
+  console.log("Seed Process Started");
+
+  console.log("Removing Existing Data");
+
+  await Skill.deleteMany();
+  await Experience.deleteMany();
+  await Education.deleteMany();
+  await Subject.deleteMany();
+
+  console.log("Seeding Skills");
   const skillsCount = await Skill.countDocuments();
   if (skillsCount === 0) {
     await seedSkills();
   }
 
+  console.log("Seeding Experiences");
   const experiencesCount = await Experience.countDocuments();
   if (experiencesCount === 0) {
     await seedExperiences();
   }
 
+  console.log("Seeding Educations");
   const educationCount = await Education.countDocuments();
   if (educationCount === 0) {
     await seedEducation();
   }
+
+  console.log("Seed Process Completed");
 };
 
 const seedExperiences = async () => {
   const experiences = [
+    // FDOT
     {
       title: "Software Engineer Consultant",
       company: "Florida Department of Transportation (FDOT)",
@@ -79,34 +94,74 @@ const seedExperiences = async () => {
         "Designed and implemented SunEx, an end-to-end real-time notification system for FDOT executives. This solution includes a web application, API integration with the State Sunguide System, and a mobile app built with the MERN stack and Expo React Native. SunEx provides real-time updates on incidents and car crashes, ensuring executives have up-to-date information.",
         "Developed the Procedural Document Library (PDL) to streamline document creation, review, and approval processes involving multiple stakeholders, including legal offices and high-ranking officials. The PDL replaced a convoluted SharePoint system, improving user permissions management and providing a clear document status history.",
         "Contributed to various maintenance projects, including bug fixes, small enhancements, and routine support tasks, ensuring system reliability and continuous improvement.",
-        "Helped the Department to speed up the creation, evaluation and approval of the organization's Documents, Policies and Forms.",
-        "Supported the Executive Branch on their desicion taking in real time.",
-        "Improved the quality if our beautifull state of Florida roads and infrastructure.",
-        "Keept services working with a minimum or no downtime by addressing issues on our codebase.",
       ],
       skillNames: ["Postman", "Azure", "Azure DevOps", "YAML", "Agile"],
     },
+    // HUD
     {
       title: "Software Architect Consultant",
       company: "US Department of Housing and Urban Development (HUD)",
       fromDate: new Date("11-01-2020"),
       toDate: new Date("04-01-2022"),
-      responsibilities: [
+      achievements: [
         "Built ECP2P, a knowledge-sharing platform designed to reduce bottlenecks in customer service by organizing common inquiries and providing autosuggestions for new queries. This system enabled users to quickly find answers and create well-informed questions, reducing dependency on email and call support.",
         "Published GIS-based visualizations that provided critical insights, including flood zone data, rental affordability, and FHA household affordability metrics, to empower citizens and stakeholders with actionable community information.",
-        "Other internal tasks.",
       ],
+      responsibilities: [
+        "Gathering of Initial Requirements.",
+        "Desing of the Project's Initial Mockups.",
+        "Desing of the Project's Technological Architecture",
+        "Desing of the Project's Data Architecture",
+        "Development of Backend and Front End Features.",
+        "Testing and Maintenance.",
+        "Team Lead.",
+      ],
+      projects: [
+        {
+          name: "ECP2P",
+          description: "Full Implementation of a Custom Forum to handle Questions, Votes, Feedback, Directives, Laws Etc. Related to the Department.",
+          skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL", "SQLite", "Semantic UI", "Kendo UI", "Adobe XD", "draw.io"],
+        },
+      ],
+      location: "Washington D.C (Remote)",
+      teamSize: 5,
     },
+    // SafeBuilt
     {
       title: "Software Engineer",
       company: "SafeBuilt (Calvin Giordano and Associates)",
       fromDate: new Date("09-01-2019"),
       toDate: new Date("10-01-2022"),
-      responsibilities: [
+      achievements: [
         "Developed tools within the Gov-Easy SaaS platform to improve client onboarding and facilitate company-wide communications, supporting a smooth merger with CGA Solutions.",
         "Designed the Security Admin Tool (SAT) to automate user onboarding and credential management. SAT enhanced organizational scalability by streamlining processes and handling increased demand during the pandemic, enabling automated workflows for employee transitions.",
         "Created a custom Point of Sale (POS) system that maintained client data privacy while reducing operational expenses. This system facilitated secure payment processing for licenses, permits, and other transactions while allowing for efficient corrections and refunds.",
       ],
+      responsibilities: [],
+      skills: [],
+      projects: [
+        {
+          name: "Gov-Easy Admin Tool (GAT)",
+          description: "",
+          skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL"],
+        },
+        {
+          name: "Gov-Easy HomePage",
+          description: "",
+          skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL"],
+        },
+        {
+          name: "Gov-Easy POS",
+          description: "",
+          skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL", "RDL", "XML"],
+        },
+        {
+          name: "Gov-Easy Reporting Services",
+          description: "",
+          skillNames: ["MSSQL", "T-SQL", "SSRS", "SSMS"],
+        },
+      ],
+      location: "Fort Lauderdale, FL",
     },
     {
       title: "Software Developer (Integrations)",
@@ -387,6 +442,25 @@ const seedSkills = async () => {
       notes: [],
       confidence: ConfidenceLevel.Beginner,
     },
+    {
+      name: "Adobe XD",
+      description:
+        "This is an Incredibly usefull tool that allows you to Create Live Mockups of aplications. In my personal opinion. If I have full control of a project I will spend between 1 and 4 weeks creating a mockup of how the final product will look. I bet that 80-90% of the UI Problems will go away.",
+      yearsOfProffesionalExperience: 5,
+      yearsOfIndividualExperience: 5,
+      yearLastUse: 2022,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "draw.io",
+      description: "Incredibly usefull tool to create diagrams of any kind.",
+      yearsOfProffesionalExperience: 5,
+      yearsOfIndividualExperience: 5,
+      yearLastUse: 2022,
+      notes: ["Mostly used to create Architectural Diagrams."],
+      confidence: ConfidenceLevel.Medium,
+    },
 
     // Database
     {
@@ -417,6 +491,15 @@ const seedSkills = async () => {
       yearsOfIndividualExperience: 5,
       yearLastUse: 2025,
       notes: ["Very useful in most of the scenarios.", "Initially was difficult to me to do queries to it, but with use I learned to work on it."],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "SQLite",
+      description: "Very usefull DBMS for Development, small apps or IoT.",
+      yearsOfProffesionalExperience: 6,
+      yearsOfIndividualExperience: 6,
+      yearLastUse: 2023,
+      notes: [],
       confidence: ConfidenceLevel.Medium,
     },
 
@@ -458,12 +541,12 @@ const seedSkills = async () => {
       confidence: ConfidenceLevel.Beginner,
     },
     {
-      name: "Fireabase",
+      name: "Firebase",
       description: "Used mostly to send Notifications to iOS and Android.",
       yearsOfProffesionalExperience: 2,
       yearsOfIndividualExperience: 2,
       yearLastUse: 2024,
-      notes: [""],
+      notes: [],
       confidence: ConfidenceLevel.Beginner,
     },
 
@@ -474,7 +557,7 @@ const seedSkills = async () => {
       yearsOfProffesionalExperience: 8,
       yearsOfIndividualExperience: 8,
       yearLastUse: 2025,
-      notes: [""],
+      notes: [],
       confidence: ConfidenceLevel.Medium,
     },
   ];
