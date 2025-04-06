@@ -26,7 +26,7 @@ const EducationItem: React.FC<IProps> = (props: IProps) => {
           }
         >
           {title}
-          <Header.Subheader>
+          <Header.Subheader style={{ margin: "0.25rem" }}>
             {school} ({formatDate(fromDate)} to {formatDate(toDate!)})
           </Header.Subheader>
         </Header>

@@ -22,7 +22,7 @@ const ExperienceItem: React.FC<IProps> = (props: IProps) => {
           onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "inherit")}
         >
           {title} at {company}
-          <Header.Subheader>
+          <Header.Subheader style={{ marginTop: "0.25rem" }}>
             {formatDate(fromDate)} – {toDate ? formatDate(toDate!) : "Current"}
           </Header.Subheader>
         </Header>

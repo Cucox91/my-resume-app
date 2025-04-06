@@ -153,45 +153,70 @@ const seedExperiences = async () => {
         {
           name: "Gov-Easy POS",
           description: "",
-          skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL", "RDL", "XML"],
+          skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL", "XML"],
         },
         {
           name: "Gov-Easy Reporting Services",
           description: "",
-          skillNames: ["MSSQL", "T-SQL", "SSRS", "SSMS"],
+          skillNames: ["MSSQL", "T-SQL", "SSRS", "SSMS", "RDL"],
         },
       ],
       location: "Fort Lauderdale, FL",
     },
+    // Maestro SIS
     {
       title: "Software Developer (Integrations)",
       company: "Maestro Student Information System by BocaVox",
       fromDate: new Date("10-01-2017"),
       toDate: new Date("09-01-2019"),
-      responsibilities: [
+      responsibilities: [],
+      achievements: [
         "Developed the Maestro Integration Manager (MIM), a tool that enabled seamless data exchange between the Maestro Student Information System (SIS) and 14 Learning Management Systems (LMS). This system improved synchronization and processing efficiency.",
         "Delivered robust backend solutions to support the highly transactional Maestro SIS, optimizing performance and ensuring scalability for educational institutions.",
       ],
+      projects: [
+        {
+          name: "Maestro Integration Manager (MIM)",
+          description: "This have been my most interestiong project. Had to take care of so many small details to improve every milisecond we can cut down.",
+          skillNames: [
+            "C#", "T-SQL",
+            "XML", "JSON", "MSSQL",
+            "CSV", "Multi-Threading",
+            "Parallelism", "Concurrency",
+            "Rest API", "FTP", "SOAP API",
+            "Serialization", "WCF", "ASP.NET MVC"
+          ]
+        }
+      ],
+      location: "Weston, FL",
+      teamSize: 10
     },
     {
       title: "Junior .NET Developer",
       company: "eNet IT Group",
       fromDate: new Date("12-01-2016"),
       toDate: new Date("11-01-2017"),
-      responsibilities: [
+      achievements: [
         "Designed and implemented full-stack solutions tailored to the automotive, financial, and marketing industries. Leveraged modern .NET and MEAN stack technologies to build scalable, high-performance applications.",
         "Developed multiple static web pages for small businesses, enabling them to establish an online presence, increase client engagement, and boost revenue growth.",
       ],
+      responsibilities: [],
+      teamSize: 4,
+      location: "Miami, FL"
     },
     {
       title: "SharePoint Administrator and Developer",
       company: "SYNCWARE",
       fromDate: new Date("04-01-2014"),
       toDate: new Date("12-01-2016"),
-      responsibilities: [
+      achievements: [
         "Created custom tools to manage Active Directory hierarchies and developed SharePoint-based workflows to streamline business processes. These solutions enhanced efficiency and reduced administrative overhead.",
         "Administered and developed modules and plugins for on-premises SharePoint Services for multiple clients, ensuring customized solutions aligned with specific business needs.",
       ],
+      responsibilities: [],
+      skillNames: ["C#", "ASP.NET MVC", "SharePoint", "Active Directory", "WPF", "WCF", "PowerShell"],
+      teamSize: 6,
+      location: "Havana, Cuba"
     },
   ];
 
@@ -272,8 +297,35 @@ const seedSkills = async () => {
       notes: ["I know, I know, calling YAML a language is the same as calling HTML one."],
       confidence: ConfidenceLevel.Beginner,
     },
+    {
+      name: "XML",
+      description: "The Real universal data transfer program.",
+      yearsOfProffesionalExperience: 10,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2022,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "PowerShell",
+      description: "My default scripting langugage.",
+      yearsOfProffesionalExperience: 10,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "JSON",
+      description: "The new universal serialization and data transfer language.",
+      yearsOfProffesionalExperience: 10,
+      yearsOfIndividualExperience: 10,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.High,
+    },
 
-    // Frameworks and Tools:
+    // Frameworks and Libraries:
     {
       name: "Blazor",
       description: "Currently using it on a Work Project. Honestly. I don't Like it. Will learn Next.JS for SSR better.",
@@ -383,15 +435,6 @@ const seedSkills = async () => {
       confidence: ConfidenceLevel.High,
     },
     {
-      name: "Postman",
-      description: "The default tool to test APIs either manually or automated.",
-      yearsOfProffesionalExperience: 7,
-      yearsOfIndividualExperience: 7,
-      yearLastUse: 2025,
-      notes: ["I want to learn more from this amazing tool."],
-      confidence: ConfidenceLevel.Beginner,
-    },
-    {
       name: "Axios",
       description: "When using the MERN Stack I want to keep all my api calls in one file per feature. There is nothing easier than rely on axios to handle the calls.",
       yearsOfProffesionalExperience: 6,
@@ -409,6 +452,53 @@ const seedSkills = async () => {
       yearLastUse: 2025,
       notes: ["Have used the JQuery, Angular and React Versions. And honestly, I like the React one the most."],
       confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "React Native",
+      description: "Allowed me to create Mobile Apps UIs for Android and iOS.",
+      yearsOfProffesionalExperience: 2,
+      yearsOfIndividualExperience: 2,
+      yearLastUse: 2024,
+      notes: [],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "WPF",
+      description: "Windows Presentation Foundation used on the creation of Desktop Applications.",
+      yearsOfProffesionalExperience: 5,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2016,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "WCF",
+      description: "Windows Comunication Foundation used on the creation of Services for Applications.",
+      yearsOfProffesionalExperience: 5,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2019,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "ASP.NET MVC",
+      description: "",
+      yearsOfProffesionalExperience: 5,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2019,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+
+    // Tools
+    {
+      name: "Postman",
+      description: "The default tool to test APIs either manually or automated.",
+      yearsOfProffesionalExperience: 7,
+      yearsOfIndividualExperience: 7,
+      yearLastUse: 2025,
+      notes: ["I want to learn more from this amazing tool."],
+      confidence: ConfidenceLevel.Beginner,
     },
     {
       name: "Docker",
@@ -434,15 +524,6 @@ const seedSkills = async () => {
       confidence: ConfidenceLevel.Beginner,
     },
     {
-      name: "React Native",
-      description: "Allowed me to create Mobile Apps UIs for Android and iOS.",
-      yearsOfProffesionalExperience: 2,
-      yearsOfIndividualExperience: 2,
-      yearLastUse: 2024,
-      notes: [],
-      confidence: ConfidenceLevel.Beginner,
-    },
-    {
       name: "Adobe XD",
       description:
         "This is an Incredibly usefull tool that allows you to Create Live Mockups of aplications. In my personal opinion. If I have full control of a project I will spend between 1 and 4 weeks creating a mockup of how the final product will look. I bet that 80-90% of the UI Problems will go away.",
@@ -460,6 +541,24 @@ const seedSkills = async () => {
       yearLastUse: 2022,
       notes: ["Mostly used to create Architectural Diagrams."],
       confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "CSV",
+      description: "Just a little bit more than text file.",
+      yearsOfProffesionalExperience: 10,
+      yearsOfIndividualExperience: 15,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "FTP",
+      description: "",
+      yearsOfProffesionalExperience: 10,
+      yearsOfIndividualExperience: 15,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.High,
     },
 
     // Database
@@ -499,6 +598,33 @@ const seedSkills = async () => {
       yearsOfProffesionalExperience: 6,
       yearsOfIndividualExperience: 6,
       yearLastUse: 2023,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "RDL",
+      description: "Language Used for Generate SQL Server Reports.",
+      yearsOfProffesionalExperience: 3,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2021,
+      notes: [],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "SSRS",
+      description: "SQL Server Reporting Service.",
+      yearsOfProffesionalExperience: 3,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2021,
+      notes: [],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "SSMS",
+      description: "SQL Server Management Studio.",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2021,
       notes: [],
       confidence: ConfidenceLevel.Medium,
     },
@@ -549,14 +675,86 @@ const seedSkills = async () => {
       notes: [],
       confidence: ConfidenceLevel.Beginner,
     },
+    {
+      name: "SharePoint",
+      description: "Description Pending.",
+      yearsOfProffesionalExperience: 5,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2016,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Active Directory",
+      description: "Description Pending.",
+      yearsOfProffesionalExperience: 5,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2016,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
 
-    // Methodologies, and Global Skills
+    // Paradigms, Methodologies, Abstract and Global Skills
     {
       name: "Agile",
       description: "For a few years all the org that I have belong to have used Agile Methodologies with Scrum.",
       yearsOfProffesionalExperience: 8,
       yearsOfIndividualExperience: 8,
       yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Multi-Threading",
+      description: "",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Parallelism",
+      description: "",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Concurrency",
+      description: "",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Rest API",
+      description: "",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2025,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "SOAP API",
+      description: "",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2019,
+      notes: [],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "Serialization",
+      description: "",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2019,
       notes: [],
       confidence: ConfidenceLevel.Medium,
     },
