@@ -34,6 +34,7 @@ const SkillTable: React.FC = () => {
             <TableHeader>
               <TableRow>
                 <TableHeaderCell>Skill</TableHeaderCell>
+                <TableHeaderCell>Confidence</TableHeaderCell>
                 <TableHeaderCell>Description</TableHeaderCell>
                 <TableHeaderCell>Last time used</TableHeaderCell>
                 <TableHeaderCell>Years Professional Use</TableHeaderCell>
@@ -42,17 +43,29 @@ const SkillTable: React.FC = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {skills!.map((s) => (
-                <TableRow key={s._id}>
-                  <TableCell>
-                    {/* <Label ribbon>First</Label> */}
-                    {s.name}
-                  </TableCell>
-                  <TableCell>{s.description || ""}</TableCell>
-                  <TableCell>{s.yearLastUse}</TableCell>
-                  <TableCell>{s.yearsOfProffesionalExperience}</TableCell>
-                  <TableCell>{s.yearsOfIndividualExperience}</TableCell>
-                  {/* <TableCell><p>
+              {skills!
+                .slice()
+                .sort((a, b) => {
+                  if (b.yearLastUse !== a.yearLastUse) {
+                    return b.yearLastUse - a.yearLastUse;
+                  }
+                  if (b.yearsOfProffesionalExperience !== a.yearsOfProffesionalExperience) {
+                    return b.yearsOfProffesionalExperience - a.yearsOfProffesionalExperience;
+                  }
+                  return b.yearsOfIndividualExperience - a.yearsOfIndividualExperience;
+                })
+                .map((s) => (
+                  <TableRow key={s._id}>
+                    <TableCell>
+                      {/* <Label ribbon>First</Label> */}
+                      {s.name}
+                    </TableCell>
+                    <TableCell>{s.confidence.toUpperCase() || ""}</TableCell>
+                    <TableCell width={5} >{s.description || ""}</TableCell>
+                    <TableCell>{s.yearLastUse}</TableCell>
+                    <TableCell>{s.yearsOfProffesionalExperience}</TableCell>
+                    <TableCell>{s.yearsOfIndividualExperience}</TableCell>
+                    {/* <TableCell><p>
                                     {s.notes.map((item, index) => (
                                         <Fragment key={index}>
                                             {item}
@@ -60,15 +73,15 @@ const SkillTable: React.FC = () => {
                                         </Fragment>
                                     ))}
                                 </p></TableCell> */}
-                  <TableCell textAlign="left">
-                    <List bulleted>
-                      {s.notes.map((item, index) => (
-                        <ListItem key={index}>{item}</ListItem>
-                      ))}
-                    </List>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    <TableCell textAlign="left">
+                      <List bulleted>
+                        {s.notes.map((item, index) => (
+                          <ListItem key={index}>{item}</ListItem>
+                        ))}
+                      </List>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </>
