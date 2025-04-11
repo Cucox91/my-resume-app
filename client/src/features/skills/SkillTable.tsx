@@ -1,9 +1,27 @@
 import { useEffect, useState } from "react";
 import { ISkill } from "../../models/ISkill";
 import { getAllSkills } from "../../apis/skillsApi";
-import { Header, Icon, List, ListItem, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
+import {
+  Divider,
+  Header,
+  HeaderSubheader,
+  Icon,
+  List,
+  ListItem,
+  Segment,
+  SegmentGroup,
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+} from "semantic-ui-react";
+import { useMediaQuery } from "react-responsive";
 
 const SkillTable: React.FC = () => {
+  const isMobile = useMediaQuery({ maxWidth: 767 }); // Mobile threshold
+
   const [skills, setSkills] = useState<ISkill[] | null>(null);
 
   useEffect(() => {
@@ -30,19 +48,8 @@ const SkillTable: React.FC = () => {
 
       {skills ? (
         <>
-          <Table celled striped textAlign="center" verticalAlign="middle">
-            <TableHeader>
-              <TableRow>
-                <TableHeaderCell>Skill</TableHeaderCell>
-                <TableHeaderCell>Confidence</TableHeaderCell>
-                <TableHeaderCell>Description</TableHeaderCell>
-                <TableHeaderCell>Last time used</TableHeaderCell>
-                <TableHeaderCell>Years Professional Use</TableHeaderCell>
-                <TableHeaderCell>Years Individual Use</TableHeaderCell>
-                <TableHeaderCell>Notes</TableHeaderCell>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
+          {isMobile ? (
+            <SegmentGroup>
               {skills!
                 .slice()
                 .sort((a, b) => {
@@ -55,35 +62,74 @@ const SkillTable: React.FC = () => {
                   return b.yearsOfIndividualExperience - a.yearsOfIndividualExperience;
                 })
                 .map((s) => (
-                  <TableRow key={s._id}>
-                    <TableCell>
-                      {/* <Label ribbon>First</Label> */}
-                      {s.name}
-                    </TableCell>
-                    <TableCell>{s.confidence.toUpperCase() || ""}</TableCell>
-                    <TableCell width={5} >{s.description || ""}</TableCell>
-                    <TableCell>{s.yearLastUse}</TableCell>
-                    <TableCell>{s.yearsOfProffesionalExperience}</TableCell>
-                    <TableCell>{s.yearsOfIndividualExperience}</TableCell>
-                    {/* <TableCell><p>
-                                    {s.notes.map((item, index) => (
-                                        <Fragment key={index}>
-                                            {item}
-                                            {index < s.notes.length - 1 && <br />}
-                                        </Fragment>
-                                    ))}
-                                </p></TableCell> */}
-                    <TableCell textAlign="left">
-                      <List bulleted>
-                        {s.notes.map((item, index) => (
-                          <ListItem key={index}>{item}</ListItem>
-                        ))}
-                      </List>
-                    </TableCell>
-                  </TableRow>
+                  <Segment textAlign="center">
+                    <Header>
+                      <Header.Content style={{ marginBottom: "0.5rem" }}>{s.name}</Header.Content>
+                      <HeaderSubheader>{s.description}</HeaderSubheader>
+                    </Header>
+
+                    <Divider horizontal>Details</Divider>
+                    <p>
+                      <b>Last Year Used:</b> {s.yearLastUse} <br />
+                      <b>Years Professional Use:</b> {s.yearsOfProffesionalExperience} <br />
+                      <b>Years Individual Use:</b> {s.yearsOfIndividualExperience} <br />
+                    </p>
+
+                    <p>
+                      {s.notes.map((n) => (
+                        <>
+                          - {n} <br />
+                        </>
+                      ))}
+                    </p>
+                  </Segment>
                 ))}
-            </TableBody>
-          </Table>
+            </SegmentGroup>
+          ) : (
+            <Table celled striped textAlign="center" verticalAlign="middle">
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderCell>Skill</TableHeaderCell>
+                  <TableHeaderCell>Confidence</TableHeaderCell>
+                  <TableHeaderCell>Description</TableHeaderCell>
+                  <TableHeaderCell>Last time used</TableHeaderCell>
+                  <TableHeaderCell>Years Professional Use</TableHeaderCell>
+                  <TableHeaderCell>Years Individual Use</TableHeaderCell>
+                  <TableHeaderCell>Notes</TableHeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {skills!
+                  .slice()
+                  .sort((a, b) => {
+                    if (b.yearLastUse !== a.yearLastUse) {
+                      return b.yearLastUse - a.yearLastUse;
+                    }
+                    if (b.yearsOfProffesionalExperience !== a.yearsOfProffesionalExperience) {
+                      return b.yearsOfProffesionalExperience - a.yearsOfProffesionalExperience;
+                    }
+                    return b.yearsOfIndividualExperience - a.yearsOfIndividualExperience;
+                  })
+                  .map((s) => (
+                    <TableRow key={s._id}>
+                      <TableCell>{s.name}</TableCell>
+                      <TableCell>{s.confidence.toUpperCase() || ""}</TableCell>
+                      <TableCell width={5}>{s.description || ""}</TableCell>
+                      <TableCell>{s.yearLastUse}</TableCell>
+                      <TableCell>{s.yearsOfProffesionalExperience}</TableCell>
+                      <TableCell>{s.yearsOfIndividualExperience}</TableCell>
+                      <TableCell textAlign="left">
+                        <List bulleted>
+                          {s.notes.map((item, index) => (
+                            <ListItem key={index}>{item}</ListItem>
+                          ))}
+                        </List>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          )}
         </>
       ) : (
         <>No Skills Found...</>
