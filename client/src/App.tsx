@@ -13,6 +13,8 @@ import SkillDetails from "./features/skills/SkillDetails";
 import SkillTable from "./features/skills/SkillTable";
 import EducationDetails from "./features/education/EducationDetails";
 import ExperienceDetails from "./features/experience/ExperienceDetails";
+import HobbyTable from "./features/hobby/HobbyTable";
+import LearningTable from "./features/learning/LearningTable";
 
 const App: React.FC = () => {
   return (
@@ -30,6 +32,8 @@ const App: React.FC = () => {
             <Route path="/skill/" element={<SkillTable />} />
             <Route path="/education/:id" element={<EducationDetails />} />
             <Route path="/experience/:id" element={<ExperienceDetails />} />
+            <Route path="/hobby" element={<HobbyTable />} />
+            <Route path="/learning" element={<LearningTable />} />
             <Route
               path="/admin"
               element={
