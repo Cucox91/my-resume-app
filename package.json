@@ -13,5 +13,9 @@
   "keywords": [],
   "author": "Raziel Arias",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "formik": "^2.4.6",
+    "yup": "^1.6.1"
+  }
 }

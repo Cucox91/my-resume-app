@@ -12,7 +12,6 @@ interface IProps {
 const ExperienceItem: React.FC<IProps> = (props: IProps) => {
   const { company, title, fromDate, toDate, achievements } = props.item;
   return (
-    <>
       <Segment id={props.id!} key={props.id!} basic>
         <Header
           as={Link}
@@ -34,7 +33,6 @@ const ExperienceItem: React.FC<IProps> = (props: IProps) => {
           ))}
         </List>
       </Segment>
-    </>
   );
 };
 

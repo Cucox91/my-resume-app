@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Grid, Header, Segment, Image, Divider, Icon, Checkbox } from "semantic-ui-react";
 import ExperienceList from "../experience/ExperienceList";
 import formatDate from "../../utils/DateAndTime";
@@ -6,10 +6,27 @@ import EducationList from "../education/EducationList";
 import SkillList from "../skills/SkillList";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
+import { IUser } from "../../models/IUser";
+import { getUserDetails } from "../../apis/adminApi";
 
 const Home: React.FC = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 }); // Mobile threshold
   const [beingHonest, setBeingHonest] = React.useState(false);
+  const [user, setUser] = useState<IUser | null>(null);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const userData = await getUserDetails("cucox91");
+        setUser(userData);
+        console.log(userData);
+      } catch (error) {
+        console.error("Failed to fetch user details", error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
 
   return (
     <Container style={{ marginTop: "2rem" }}>
@@ -18,17 +35,19 @@ const Home: React.FC = () => {
         <Grid.Row columns={2}>
           <Grid.Column>
             <p>
-              Miami, FL, 33125 <br />
-              +1 786-879-6101 <br />
-              raziel.arias1991@gmail.com
+              {user?.address} <br />
+              {user?.phone} <br />
+              {user?.email}
             </p>
           </Grid.Column>
-          <Grid.Column textAlign="right">
-            <Header as="h4" style={{ marginTop: "0.5rem", marginBottom: "0.1rem" }}>
-              Latest Update: <br />
-            </Header>
-            <p>{formatDate(new Date())}</p>
-          </Grid.Column>
+          {user?.latestUpdate && (
+            <Grid.Column textAlign="right">
+              <Header as="h4" style={{ marginTop: "0.5rem", marginBottom: "0.1rem" }}>
+                Latest Update: <br />
+              </Header>
+              <p>{formatDate(user!.latestUpdate)}</p>
+            </Grid.Column>
+          )}
         </Grid.Row>
       </Grid>
 
@@ -46,21 +65,26 @@ const Home: React.FC = () => {
             Raziel Arias
           </Header>
           {beingHonest ? (
-            <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }}>
-              All I want is to keep learning, to build cool things that matter, and to provide for the people I love. <br />
-              <br /> When I was a toddler (around 3 to 4yo), my dad gave me a bucket of LEGO bricks. He sat beside me and helped me build the figures from the instruction manual.
-              That was fun—but then something amazing happened. He started creating things that weren’t in the manual. Suddenly, the possibilities were endless. That moment sparked
-              something in me. It was the day I fell in love with building. In many ways, it was also my first experience with programming.
-              <br />
-              <br /> Thanks, Dad. You’ll probably never read this, but thank you for giving me my life’s mission.
-            </p>
+            // <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }}>
+            //   All I want is to keep learning, to build cool things that matter, and to provide for the people I love. <br />
+            //   <br /> When I was a toddler (around 3 to 4yo), my dad gave me a bucket of LEGO bricks. He sat beside me and helped me build the figures from the instruction manual.
+            //   That was fun—but then something amazing happened. He started creating things that weren’t in the manual. Suddenly, the possibilities were endless. That moment sparked
+            //   something in me. It was the day I fell in love with building. In many ways, it was also my first experience with programming.
+            //   <br />
+            //   <br /> Thanks, Dad. You’ll probably never read this, but thank you for giving me my life’s mission.
+            // </p>
+            <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: user?.bioHonest ?? "" }} />
           ) : (
-            <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }}>
-              Dynamic Full Stack Developer with over a decade of experience in designing, developing, and deploying scalable solutions for government, private sector, and SaaS
-              applications. Proficient in leveraging modern technologies such as Blazor, MERN Stack, .NET, and cloud platforms like Azure to deliver robust systems that enhance
-              operational efficiency and client satisfaction. Known for innovative problem-solving, driving digital transformation, and a commitment to continuous learning to stay
-              ahead in a fast-evolving tech landscape.
-            </p>
+            // <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }}>
+            //   Dynamic Full Stack Developer with over a decade of experience in designing, developing, and deploying scalable solutions for government, private sector, and SaaS
+            //   applications. Proficient in leveraging modern technologies such as Blazor, MERN Stack, .NET, and cloud platforms like Azure to deliver robust systems that enhance
+            //   operational efficiency and client satisfaction. Known for innovative problem-solving, driving digital transformation, and a commitment to continuous learning to stay
+            //   ahead in a fast-evolving tech landscape.
+            // </p>
+            <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: user?.bioCliche ?? "" }} />
+
+            // <p dangerouslySetInnerHTML={{ __html: beingHonest ? honestBio : clicheBio }} />
+            // <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }} dangerouslySetInnerHTML={{ __html: dynamicBioText }} />
           )}
 
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "1rem" }}>

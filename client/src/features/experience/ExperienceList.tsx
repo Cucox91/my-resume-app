@@ -28,7 +28,7 @@ const ExperienceList: React.FC = () => {
         {experiences.map((e, index) => (
           <>
             <ExperienceItem id={e._id!} key={e._id!} item={e} />
-            {experiences.length - 1 !== index && <Divider />}
+            {experiences.length - 1 !== index && <Divider key={e._id+"_dv"} />}
           </>
         ))}
       </>

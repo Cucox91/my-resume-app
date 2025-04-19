@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Container, Dropdown, DropdownMenu, DropdownItem } from "semantic-ui-react";
+import { Menu, Container, Dropdown, DropdownMenu, DropdownItem, Icon } from "semantic-ui-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../context/useUser";
 
@@ -16,10 +16,16 @@ const Header: React.FC = () => {
         <Dropdown item text="More about me.">
           <DropdownMenu>
             <DropdownItem as={Link} to="/hobby">
-              Hobbies
+              <>
+                <Icon name="untappd"></Icon>
+                Hobbies
+              </>
             </DropdownItem>
             <DropdownItem as={Link} to="/learning">
-              Currently Learning
+              <>
+                <Icon name="book"></Icon>
+                Currently Learning
+              </>
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
@@ -32,15 +38,20 @@ const Header: React.FC = () => {
                   Admin Login
                 </DropdownItem>
               ) : (
-                <DropdownItem
-                  onClick={() => {
-                    localStorage.removeItem("token");
-                    setUser(null);
-                    navigate("/");
-                  }}
-                >
-                  Logout
-                </DropdownItem>
+                <>
+                  <DropdownItem as={Link} to="/admin">
+                    Admin Page
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      setUser(null);
+                      navigate("/");
+                    }}
+                  >
+                    Logout
+                  </DropdownItem>
+                </>
               )}
 
               {/* <DropdownItem as={Link} to="/register">
