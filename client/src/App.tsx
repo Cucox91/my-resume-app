@@ -15,38 +15,41 @@ import EducationDetails from "./features/education/EducationDetails";
 import ExperienceDetails from "./features/experience/ExperienceDetails";
 import HobbyTable from "./features/hobby/HobbyTable";
 import LearningTable from "./features/learning/LearningTable";
+import { UserProvider } from "./context/UserContext";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        <Header />
-        {/* Main content area: grows to fill available space */}
-        <div style={{ flex: 1, padding: "2em" }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/resume/:id" element={<ResumeDetail />} />
-            <Route path="/skill/:id" element={<SkillDetails />} />
-            <Route path="/skill/" element={<SkillTable />} />
-            <Route path="/education/:id" element={<EducationDetails />} />
-            <Route path="/experience/:id" element={<ExperienceDetails />} />
-            <Route path="/hobby" element={<HobbyTable />} />
-            <Route path="/learning" element={<LearningTable />} />
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
+    <UserProvider>
+      <Router>
+        <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+          <Header />
+          {/* Main content area: grows to fill available space */}
+          <div style={{ flex: 1, padding: "2em" }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/resume/:id" element={<ResumeDetail />} />
+              <Route path="/skill/:id" element={<SkillDetails />} />
+              <Route path="/skill/" element={<SkillTable />} />
+              <Route path="/education/:id" element={<EducationDetails />} />
+              <Route path="/experience/:id" element={<ExperienceDetails />} />
+              <Route path="/hobby" element={<HobbyTable />} />
+              <Route path="/learning" element={<LearningTable />} />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </UserProvider>
   );
 };
 

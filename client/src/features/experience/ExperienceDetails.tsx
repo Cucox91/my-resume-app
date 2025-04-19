@@ -40,7 +40,7 @@ const ExperienceDetails: React.FC = () => {
           {experience.achievements!.length > 0 && (
             <>
               <Divider></Divider>
-              <Divider as="h3" dividing horizontal textAlign="center">
+              <Divider as="h3" horizontal textAlign="center">
                 Achievements
               </Divider>
               <Divider></Divider>
@@ -60,7 +60,7 @@ const ExperienceDetails: React.FC = () => {
           {experience.responsibilities.length > 0 && (
             <>
               <Divider></Divider>
-              <Divider as="h3" dividing horizontal textAlign="center">
+              <Divider as="h3" horizontal textAlign="center">
                 Responsibilities
               </Divider>
               <Divider></Divider>
@@ -79,7 +79,7 @@ const ExperienceDetails: React.FC = () => {
           {experience.skills!.length > 0 && (
             <>
               <Divider></Divider>
-              <Divider as="h3" dividing horizontal textAlign="center">
+              <Divider as="h3" horizontal textAlign="center">
                 General Skills
               </Divider>
               <Divider></Divider>
@@ -88,8 +88,8 @@ const ExperienceDetails: React.FC = () => {
                 <Item>
                   <ItemContent>
                     <ItemDescription>
-                      {experience.skills!.map((s) => (
-                        <Label as={Link} to={`/skill/${s._id}`}>
+                      {experience.skills!.map((s, idx) => (
+                        <Label key={idx} as={Link} to={`/skill/${s._id}`} style={{ margin: "0.2rem" }}>
                           {s.name}
                         </Label>
                       ))}
@@ -103,7 +103,7 @@ const ExperienceDetails: React.FC = () => {
           {experience.projects!.length > 0 && (
             <>
               <Divider></Divider>
-              <Divider as="h3" dividing horizontal textAlign="center">
+              <Divider as="h3" horizontal textAlign="center">
                 Projects
               </Divider>
               <Divider></Divider>
@@ -117,8 +117,8 @@ const ExperienceDetails: React.FC = () => {
                         <ItemDescription>
                           {/* Raziel: Make this look better later.*/}
                           <strong style={{ textAlign: "center" }}>Skills:</strong>
-                          {project.skills.map((s) => (
-                            <Label as={Link} to={`/skill/${s._id}`} style={{ margin: "0.3rem" }}>
+                          {project.skills.map((s, i) => (
+                            <Label key={i} as={Link} to={`/skill/${s._id}`} style={{ margin: "0.3rem" }}>
                               {s.name}
                             </Label>
                           ))}
@@ -132,7 +132,7 @@ const ExperienceDetails: React.FC = () => {
           )}
 
           <Divider></Divider>
-          <Divider as="h3" dividing horizontal textAlign="center">
+          <Divider as="h3" horizontal textAlign="center">
             Other Details
           </Divider>
           <Divider></Divider>

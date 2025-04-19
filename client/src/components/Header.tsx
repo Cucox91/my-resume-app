@@ -1,8 +1,12 @@
 import React from "react";
 import { Menu, Container, Dropdown, DropdownMenu, DropdownItem } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../context/useUser";
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+  const { user, setUser } = useUser();
+
   return (
     <Menu stackable inverted>
       <Container fluid>
@@ -23,9 +27,22 @@ const Header: React.FC = () => {
         <Menu.Menu position="right">
           <Dropdown item text="Account">
             <DropdownMenu>
-              <DropdownItem as={Link} to="/login">
-                Admin Login
-              </DropdownItem>
+              {!user ? (
+                <DropdownItem as={Link} to="/login">
+                  Admin Login
+                </DropdownItem>
+              ) : (
+                <DropdownItem
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    setUser(null);
+                    navigate("/");
+                  }}
+                >
+                  Logout
+                </DropdownItem>
+              )}
+
               {/* <DropdownItem as={Link} to="/register">
                 Register
               </DropdownItem> */}
