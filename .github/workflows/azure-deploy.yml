@@ -20,7 +20,7 @@ jobs:
 
       - name: 📦 Install client dependencies
         working-directory: ./client
-        run: npm install
+        run: npm install --no-optional
 
       - name: 🛠️ Build client
         working-directory: ./client
