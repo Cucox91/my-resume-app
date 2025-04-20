@@ -8,4 +8,10 @@ export interface IUser {
   latestUpdate: Date | null;
   bioCliche: string;
   bioHonest: string;
+  avatar?: {
+    data: {
+      type: string;
+      data: number[];
+    };
+  };
 }

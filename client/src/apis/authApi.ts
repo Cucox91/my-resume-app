@@ -28,3 +28,12 @@ export const registerUser = async (
   localStorage.setItem("token", token);
   return result;
 };
+
+export const uploadAvatar = async (formData: FormData) => {
+  const result = await axiosInstance.post("/api/auth/upload-avatar", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return result;
+};

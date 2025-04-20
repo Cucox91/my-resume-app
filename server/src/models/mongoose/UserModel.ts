@@ -11,6 +11,10 @@ export interface IUser extends Document {
   latestUpdate: Date | null;
   bioCliche: string;
   bioHonest: string;
+  avatar: {
+    data: Buffer;
+    contentType: string;
+  };
 }
 
 const UserSchema = new Schema<IUser>({
@@ -24,6 +28,10 @@ const UserSchema = new Schema<IUser>({
   bioCliche: { type: String },
   bioHonest: { type: String },
   latestUpdate: { type: Date },
+  avatar: {
+    data: Buffer,
+    contentType: String, // store MIME type, e.g., "image/jpeg"
+  },
 });
 
 export default model<IUser>("User", UserSchema);

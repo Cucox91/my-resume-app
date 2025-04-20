@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "semantic-ui-css/semantic.min.css";
+import { ToastContainer } from "react-toastify";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./features/home/Home";
@@ -16,6 +16,9 @@ import ExperienceDetails from "./features/experience/ExperienceDetails";
 import HobbyTable from "./features/hobby/HobbyTable";
 import LearningTable from "./features/learning/LearningTable";
 import { UserProvider } from "./context/UserContext";
+
+import "semantic-ui-css/semantic.min.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const App: React.FC = () => {
   return (
@@ -46,6 +49,7 @@ const App: React.FC = () => {
               />
             </Routes>
           </div>
+          <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick pauseOnFocusLoss draggable pauseOnHover theme="colored" />
           <Footer />
         </div>
       </Router>

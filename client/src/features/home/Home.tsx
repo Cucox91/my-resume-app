@@ -13,13 +13,20 @@ const Home: React.FC = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 }); // Mobile threshold
   const [beingHonest, setBeingHonest] = React.useState(false);
   const [user, setUser] = useState<IUser | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
         const userData = await getUserDetails("cucox91");
         setUser(userData);
-        console.log(userData);
+
+        if (userData!.avatar) {
+          const uint8Array = new Uint8Array(userData!.avatar.data.data);
+          const blob = new Blob([uint8Array], { type: userData!.avatar.data.type });
+          const imageUrl = URL.createObjectURL(blob);
+          setPreviewImage(imageUrl);
+        }
       } catch (error) {
         console.error("Failed to fetch user details", error);
       }
@@ -53,16 +60,16 @@ const Home: React.FC = () => {
 
       {isMobile && (
         <Segment basic style={{ display: "flex", alignItems: "center", marginTop: "2rem" }}>
-          <Image src="/raziel.jpg" alt="Profile" circular size="massive" style={{ marginRight: "2rem" }} />
+          <Image src={previewImage ? previewImage : "/profile.png"} alt="Profile" circular size="massive" style={{ marginRight: "2rem" }} />
         </Segment>
       )}
 
       {/* Profile & Short Bio */}
       <Segment basic style={{ display: "flex", alignItems: "center", marginTop: "2rem" }}>
-        {!isMobile && <Image src="/raziel.jpg" alt="Profile" circular size={beingHonest ? "huge" : "massive"} style={{ marginRight: "2rem" }} />}
+        {!isMobile && <Image src={previewImage ? previewImage : "/profile.png"} alt="Profile" circular size={beingHonest ? "huge" : "massive"} style={{ marginRight: "2rem" }} />}
         <Segment vertical style={{ verticalAlign: "top" }}>
           <Header as="h1" style={{ marginTop: "0.1rem", marginBottom: "0.9rem" }}>
-            Raziel Arias
+            {user?.firstName} {user?.lastName}
           </Header>
           {beingHonest ? (
             // <p style={{ fontSize: "1.2rem", lineHeight: 1.5 }}>

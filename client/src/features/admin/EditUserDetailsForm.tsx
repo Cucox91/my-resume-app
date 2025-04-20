@@ -2,9 +2,11 @@ import { Form as FormikForm, Formik } from "formik";
 import { Button, Divider, Form } from "semantic-ui-react";
 import { useUser } from "../../context/useUser";
 import * as Yup from "yup";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { IUser } from "../../models/IUser";
 import { getUserDetails, saveUserDetails } from "../../apis/adminApi";
+import { uploadAvatar } from "../../apis/authApi";
+import { toast } from "react-toastify";
 
 interface FormValues {
   username: string;
@@ -30,6 +32,8 @@ const validationSchema = Yup.object({
 const EditUserDetailsForm: React.FC = () => {
   const { user } = useUser();
   const [userDetails, setUserDetails] = useState<IUser | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -37,6 +41,13 @@ const EditUserDetailsForm: React.FC = () => {
         try {
           const userData = await getUserDetails(user.username);
           setUserDetails(userData);
+
+          if (userData!.avatar) {
+            const uint8Array = new Uint8Array(userData!.avatar.data.data);
+            const blob = new Blob([uint8Array], { type: userData!.avatar.data.type });
+            const imageUrl = URL.createObjectURL(blob);
+            setPreviewImage(imageUrl);
+          }
         } catch (error) {
           console.error("Failed to fetch user details", error);
         }
@@ -59,13 +70,13 @@ const EditUserDetailsForm: React.FC = () => {
   };
 
   const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
-    console.log("Submitting form values:", values);
     try {
-      const result = await saveUserDetails(values.username, values);
-      console.log(result);
+      await saveUserDetails(values.username, values);
       console.log("Form submitted!");
+      toast.success("User Successfully Updated");
     } catch (error) {
       console.error("Form submission error", error);
+      toast.error("Error trying to Upldate the User.");
     } finally {
       setSubmitting(false);
     }
@@ -101,7 +112,6 @@ const EditUserDetailsForm: React.FC = () => {
               error={touched.address && errors.address ? { content: errors.address, pointing: "below" } : null}
               placeholder="Enter your address"
             />
-            {/* FormikForm here */}
             <Form.Group widths="equal">
               <Form.Input
                 label="First Name"
@@ -154,6 +164,7 @@ const EditUserDetailsForm: React.FC = () => {
               onBlur={handleBlur}
               error={touched.bioCliche && errors.bioCliche ? { content: errors.bioCliche, pointing: "below" } : null}
               placeholder="Write a cliche version of your bio"
+              rows={10}
             />
             <Form.TextArea
               label="Honest Bio"
@@ -163,6 +174,7 @@ const EditUserDetailsForm: React.FC = () => {
               onBlur={handleBlur}
               error={touched.bioHonest && errors.bioHonest ? { content: errors.bioHonest, pointing: "below" } : null}
               placeholder="Write an honest version of your bio"
+              rows={10}
             />
             <Button type="submit" primary fluid loading={isSubmitting} disabled={isSubmitting} style={{ marginTop: "1em" }}>
               Save Changes
@@ -170,6 +182,51 @@ const EditUserDetailsForm: React.FC = () => {
           </FormikForm>
         )}
       </Formik>
+      <Divider horizontal content="Profile Picture" style={{ marginTop: "2rem" }} />
+
+      <div style={{ textAlign: "center", marginBottom: "1rem" }}>
+        {previewImage ? (
+          <img src={previewImage} alt="Avatar Preview" style={{ width: "150px", height: "150px", objectFit: "cover", borderRadius: "50%" }} />
+        ) : (
+          <div style={{ width: "150px", height: "150px", backgroundColor: "#ccc", borderRadius: "50%", display: "inline-block" }} />
+        )}
+      </div>
+
+      <Button type="button" onClick={() => fileInputRef.current?.click()} primary fluid>
+        Upload New Photo
+      </Button>
+
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        accept="image/*"
+        onChange={async (e) => {
+          const file = e.target.files?.[0];
+          if (!file) return;
+
+          // Preview the selected image
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setPreviewImage(reader.result as string);
+          };
+          reader.readAsDataURL(file);
+
+          // Upload to server
+          const formData = new FormData();
+          formData.append("avatar", file);
+          formData.append("username", user!.username);
+
+          try {
+            await uploadAvatar(formData); // 🚀 Create this API call
+            console.log("Image uploaded successfully!");
+            toast.success("Image uploaded successfully!");
+          } catch (error) {
+            console.error("Image upload failed", error);
+            toast.error("Image Upload Failed");
+          }
+        }}
+      />
     </>
   );
 };

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import User from "../models/mongoose/UserModel";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import multer from "multer";
 
 const JWT_SECRET = process.env.JWT_SECRET || "changeme";
 const TOKEN_EXPIRY = "1h"; // 1 hour
@@ -106,6 +107,57 @@ export const setUserDetails = async (req: Request, res: Response, next: NextFunc
     const updatedUser = await user.save();
 
     res.json(updatedUser);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/*Upload of Photos*/
+// Multer setup for memory storage
+const storage = multer.memoryStorage();
+export const upload = multer({ storage });
+
+export const uploadAvatar = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { username } = req.body;
+
+    if (!req.file) {
+      res.status(400).json({ message: "No file uploaded" });
+      return;
+    }
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    user.avatar = {
+      data: req.file.buffer,
+      contentType: req.file.mimetype,
+    };
+
+    await user.save();
+
+    res.json({ message: "Avatar uploaded successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUserAvatar = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+
+    if (!user || !user.avatar || !user.avatar.data) {
+      res.status(404).json({ message: "Avatar not found" });
+      return;
+    }
+
+    res.set("Content-Type", user.avatar.contentType);
+    res.send(user.avatar.data);
   } catch (error) {
     next(error);
   }
