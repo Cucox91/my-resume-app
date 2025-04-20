@@ -18,6 +18,11 @@ jobs:
         with:
           node-version: '22'
 
+      - name: 🧹 Clean node_modules and package-lock
+        working-directory: ./client
+        run: |
+          rm -rf node_modules package-lock.json
+
       - name: 📦 Install client dependencies
         working-directory: ./client
         run: npm install
