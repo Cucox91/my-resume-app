@@ -60,13 +60,21 @@ const Home: React.FC = () => {
 
       {isMobile && (
         <Segment basic style={{ display: "flex", alignItems: "center", marginTop: "2rem" }}>
-          <Image src={previewImage ? previewImage : "/profile.png"} alt="Profile" circular size="massive" style={{ marginRight: "2rem" }} />
+          <Image src={previewImage ? previewImage : "/profile.png"} alt="Profile" circular size="massive" style={{ marginRight: "2rem", maxWidth: "20rem", maxHeight: "20rem" }} />
         </Segment>
       )}
 
       {/* Profile & Short Bio */}
       <Segment basic style={{ display: "flex", alignItems: "center", marginTop: "2rem" }}>
-        {!isMobile && <Image src={previewImage ? previewImage : "/profile.png"} alt="Profile" circular size={beingHonest ? "huge" : "massive"} style={{ marginRight: "2rem" }} />}
+        {!isMobile && (
+          <Image
+            src={previewImage ? previewImage : "/profile.png"}
+            alt="Profile"
+            circular
+            size={beingHonest ? "huge" : "massive"}
+            style={{ marginRight: "2rem", maxWidth: "20rem",maxHeight: "20rem" }}
+          />
+        )}
         <Segment vertical style={{ verticalAlign: "top" }}>
           <Header as="h1" style={{ marginTop: "0.1rem", marginBottom: "0.9rem" }}>
             {user?.firstName} {user?.lastName}
