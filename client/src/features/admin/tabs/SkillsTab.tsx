@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Form, Segment } from "semantic-ui-react";
+import { Button, Divider, Form, Message, Segment } from "semantic-ui-react";
 import { getAllSkills, createSkill, updateSkill, deleteSkill } from "../../../apis/skillsApi";
 import { ISkill } from "../../../models/ISkill";
 import { toast } from "react-toastify";
@@ -21,8 +21,17 @@ const emptySkill = (): ISkill => ({
   experiences: [],
 });
 
+const validate = (skill: ISkill): string[] => {
+  const errors: string[] = [];
+  if (!skill.name.trim()) errors.push("Name is required.");
+  if (!skill.confidence) errors.push("Confidence is required.");
+  if (!skill.yearLastUse) errors.push("Year Last Used is required.");
+  return errors;
+};
+
 const SkillsTab: React.FC = () => {
   const [skills, setSkills] = useState<ISkill[]>([]);
+  const [errors, setErrors] = useState<Record<number, string[]>>({});
 
   useEffect(() => {
     getAllSkills().then((data) => {
@@ -32,10 +41,13 @@ const SkillsTab: React.FC = () => {
 
   const handleChange = (index: number, field: keyof ISkill, value: string | number) => {
     setSkills((prev) => prev.map((s, i) => i === index ? { ...s, [field]: value } : s));
+    setErrors((prev) => ({ ...prev, [index]: [] }));
   };
 
   const handleSave = async (index: number) => {
     const skill = skills[index];
+    const errs = validate(skill);
+    if (errs.length > 0) { setErrors((prev) => ({ ...prev, [index]: errs })); return; }
     try {
       if (skill._id) {
         const updated = await updateSkill(skill._id, skill);
@@ -55,6 +67,7 @@ const SkillsTab: React.FC = () => {
     try {
       if (skill._id) await deleteSkill(skill._id);
       setSkills((prev) => prev.filter((_, i) => i !== index));
+      setErrors((prev) => { const e = { ...prev }; delete e[index]; return e; });
       toast.success("Skill deleted.");
     } catch {
       toast.error("Failed to delete skill.");
@@ -68,18 +81,20 @@ const SkillsTab: React.FC = () => {
       </Button>
       {skills.map((skill, index) => (
         <Segment key={skill._id ?? `new-${index}`}>
-          <Form>
+          <Form error={!!errors[index]?.length}>
             <Form.Group widths="equal">
               <Form.Input
                 label="Name"
                 value={skill.name}
                 onChange={(e) => handleChange(index, "name", e.target.value)}
+                error={errors[index]?.includes("Name is required.")}
               />
               <Form.Select
                 label="Confidence"
                 options={confidenceOptions}
                 value={skill.confidence}
                 onChange={(_, data) => handleChange(index, "confidence", data.value as string)}
+                error={errors[index]?.includes("Confidence is required.")}
               />
             </Form.Group>
             <Form.TextArea
@@ -105,8 +120,12 @@ const SkillsTab: React.FC = () => {
                 type="number"
                 value={skill.yearLastUse}
                 onChange={(e) => handleChange(index, "yearLastUse", Number(e.target.value))}
+                error={errors[index]?.includes("Year Last Used is required.")}
               />
             </Form.Group>
+            {errors[index]?.length > 0 && (
+              <Message error list={errors[index]} />
+            )}
           </Form>
           <Divider />
           <Button primary onClick={() => handleSave(index)}>Save</Button>

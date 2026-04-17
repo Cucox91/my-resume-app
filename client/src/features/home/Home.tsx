@@ -63,7 +63,7 @@ const Home: React.FC = () => {
 
       {isMobile && (
         <Segment basic style={{ display: "flex", alignItems: "center", marginTop: "2rem" }}>
-          <Image src={previewImage ? previewImage : "/profile.png"} alt="Profile" circular size="massive" style={{ marginRight: "2rem", maxWidth: "20rem", maxHeight: "20rem" }} />
+          <Image src={previewImage ?? "/profile.png"} alt="Profile" circular size="massive" style={{ marginRight: "2rem", maxWidth: "20rem", maxHeight: "20rem", visibility: previewImage ? "visible" : "hidden" }} />
         </Segment>
       )}
 
@@ -71,11 +71,11 @@ const Home: React.FC = () => {
       <Segment basic style={{ display: "flex", alignItems: "center", marginTop: "2rem" }}>
         {!isMobile && (
           <Image
-            src={previewImage ? previewImage : "/profile.png"}
+            src={previewImage ?? "/profile.png"}
             alt="Profile"
             circular
             size={beingHonest ? "huge" : "massive"}
-            style={{ marginRight: "2rem", maxWidth: "20rem",maxHeight: "20rem" }}
+            style={{ marginRight: "2rem", maxWidth: "20rem", maxHeight: "20rem", visibility: previewImage ? "visible" : "hidden" }}
           />
         )}
         <Segment vertical style={{ verticalAlign: "top" }}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Form, Segment, Header } from "semantic-ui-react";
+import { Button, Divider, Form, Message, Segment, Header } from "semantic-ui-react";
 import { getAllExperiences, createExperience, updateExperience, deleteExperience } from "../../../apis/experienceApi";
 import { IExperience } from "../../../models/IExperience";
 import { toast } from "react-toastify";
@@ -20,8 +20,17 @@ const emptyExperience = (): IExperience => ({
 const toDateString = (date: Date | null | undefined): string =>
   date ? new Date(date).toISOString().split("T")[0] : "";
 
+const validate = (item: IExperience): string[] => {
+  const errors: string[] = [];
+  if (!item.title.trim()) errors.push("Title is required.");
+  if (!item.company.trim()) errors.push("Company is required.");
+  if (!item.fromDate) errors.push("From date is required.");
+  return errors;
+};
+
 const ExperienceTab: React.FC = () => {
   const [items, setItems] = useState<IExperience[]>([]);
+  const [errors, setErrors] = useState<Record<number, string[]>>({});
 
   useEffect(() => {
     getAllExperiences().then((data) => { if (data) setItems(data); });
@@ -39,10 +48,13 @@ const ExperienceTab: React.FC = () => {
         return { ...item, [field]: value };
       })
     );
+    setErrors((prev) => ({ ...prev, [index]: [] }));
   };
 
   const handleSave = async (index: number) => {
     const item = items[index];
+    const errs = validate(item);
+    if (errs.length > 0) { setErrors((prev) => ({ ...prev, [index]: errs })); return; }
     try {
       if (item._id) {
         const updated = await updateExperience(item._id, item);
@@ -62,6 +74,7 @@ const ExperienceTab: React.FC = () => {
     try {
       if (item._id) await deleteExperience(item._id);
       setItems((prev) => prev.filter((_, i) => i !== index));
+      setErrors((prev) => { const e = { ...prev }; delete e[index]; return e; });
       toast.success("Experience deleted.");
     } catch {
       toast.error("Failed to delete experience.");
@@ -76,17 +89,19 @@ const ExperienceTab: React.FC = () => {
       {items.map((item, index) => (
         <Segment key={item._id ?? `new-${index}`}>
           <Header as="h4">{item.title || "New Experience"} {item.company ? `— ${item.company}` : ""}</Header>
-          <Form>
+          <Form error={!!errors[index]?.length}>
             <Form.Group widths="equal">
               <Form.Input
                 label="Title"
                 value={item.title}
                 onChange={(e) => handleChange(index, "title", e.target.value)}
+                error={errors[index]?.includes("Title is required.")}
               />
               <Form.Input
                 label="Company"
                 value={item.company}
                 onChange={(e) => handleChange(index, "company", e.target.value)}
+                error={errors[index]?.includes("Company is required.")}
               />
             </Form.Group>
             <Form.Group widths="equal">
@@ -95,6 +110,7 @@ const ExperienceTab: React.FC = () => {
                 type="date"
                 value={toDateString(item.fromDate)}
                 onChange={(e) => handleChange(index, "fromDate", e.target.value)}
+                error={errors[index]?.includes("From date is required.")}
               />
               <Form.Input
                 label="To (leave blank if current)"
@@ -128,6 +144,9 @@ const ExperienceTab: React.FC = () => {
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleChange(index, "achievements", e.target.value)}
               rows={4}
             />
+            {errors[index]?.length > 0 && (
+              <Message error list={errors[index]} />
+            )}
           </Form>
           <Divider />
           <Button primary onClick={() => handleSave(index)}>Save</Button>

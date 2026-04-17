@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Divider, Form, Segment } from "semantic-ui-react";
+import { Button, Divider, Form, Message, Segment } from "semantic-ui-react";
 import { getAllEducation, createEducation, updateEducation, deleteEducation } from "../../../apis/educationApi";
 import { IEducation } from "../../../models/IEducation";
 import { toast } from "react-toastify";
@@ -17,8 +17,17 @@ const emptyEducation = (): IEducation => ({
 const toDateString = (date: Date | null): string =>
   date ? new Date(date).toISOString().split("T")[0] : "";
 
+const validate = (item: IEducation): string[] => {
+  const errors: string[] = [];
+  if (!item.title.trim()) errors.push("Title is required.");
+  if (!item.school.trim()) errors.push("School is required.");
+  if (!item.fromDate) errors.push("From date is required.");
+  return errors;
+};
+
 const EducationTab: React.FC = () => {
   const [items, setItems] = useState<IEducation[]>([]);
+  const [errors, setErrors] = useState<Record<number, string[]>>({});
 
   useEffect(() => {
     getAllEducation().then((data) => { if (data) setItems(data); });
@@ -35,10 +44,13 @@ const EducationTab: React.FC = () => {
         return { ...item, [field]: value };
       })
     );
+    setErrors((prev) => ({ ...prev, [index]: [] }));
   };
 
   const handleSave = async (index: number) => {
     const item = items[index];
+    const errs = validate(item);
+    if (errs.length > 0) { setErrors((prev) => ({ ...prev, [index]: errs })); return; }
     try {
       if (item._id) {
         const updated = await updateEducation(item._id, item);
@@ -58,6 +70,7 @@ const EducationTab: React.FC = () => {
     try {
       if (item._id) await deleteEducation(item._id);
       setItems((prev) => prev.filter((_, i) => i !== index));
+      setErrors((prev) => { const e = { ...prev }; delete e[index]; return e; });
       toast.success("Education deleted.");
     } catch {
       toast.error("Failed to delete education.");
@@ -71,17 +84,19 @@ const EducationTab: React.FC = () => {
       </Button>
       {items.map((item, index) => (
         <Segment key={item._id ?? `new-${index}`}>
-          <Form>
+          <Form error={!!errors[index]?.length}>
             <Form.Group widths="equal">
               <Form.Input
                 label="Title / Degree"
                 value={item.title}
                 onChange={(e) => handleChange(index, "title", e.target.value)}
+                error={errors[index]?.includes("Title is required.")}
               />
               <Form.Input
                 label="School"
                 value={item.school}
                 onChange={(e) => handleChange(index, "school", e.target.value)}
+                error={errors[index]?.includes("School is required.")}
               />
             </Form.Group>
             <Form.Group widths="equal">
@@ -90,6 +105,7 @@ const EducationTab: React.FC = () => {
                 type="date"
                 value={toDateString(item.fromDate)}
                 onChange={(e) => handleChange(index, "fromDate", e.target.value)}
+                error={errors[index]?.includes("From date is required.")}
               />
               <Form.Input
                 label="To (leave blank if current)"
@@ -110,6 +126,9 @@ const EducationTab: React.FC = () => {
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleChange(index, "generalNotes", e.target.value)}
               rows={3}
             />
+            {errors[index]?.length > 0 && (
+              <Message error list={errors[index]} />
+            )}
           </Form>
           <Divider />
           <Button primary onClick={() => handleSave(index)}>Save</Button>
