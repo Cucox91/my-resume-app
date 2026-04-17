@@ -55,33 +55,30 @@ const seedExperiences = async () => {
   const experiences = [
     // FDOT
     {
-      title: "Software Engineer Consultant",
+      title: "Software Engineer",
       company: "Florida Department of Transportation (FDOT)",
       fromDate: new Date("04-01-2022"),
       toDate: null,
       teamSize: 20,
-      Location: "Miami, FL (Remote)",
+      location: "Miami, FL (Remote)",
       responsibilities: [
-        "Developed, maintained, and refactored complex codebases across multiple applications to improve scalability, maintainability, and performance.",
-        "Actively collaborated with software architects to assess feasibility of technical proposals and guided system design decisions.",
-        "Designed and managed CI/CD workflows using Azure DevOps, streamlining deployments and reducing delivery bottlenecks.",
-      ],
-      achievements: [
-        "Reduced MRP inspection turnaround by 50% through app modernization and API integrations.",
-        "Improved executive decision-making speed with real-time highway event updates.",
-        "Reduced document approval time by 60% with PDL automation.",
+        "Led modernization of MRP2, replacing a legacy mainframe-driven roadway inspection process with a modern .NET + SQL Server + ArcGIS platform that keeps inspectors, reviewers, and GIS data in near real-time sync.",
+        "Designed and delivered SunEx, a real-time incident notification system spanning a Node.js API, MERN web application, Firebase push pipeline, and React Native / Expo mobile app; supports roughly 400 subscribed users.",
+        "Built PDL, a workflow-heavy system used to create, route, revise, approve, and publish policy and procedural documents across requestors, legal review, directors, and executive leadership; supports about 1,000 concurrent users.",
+        "Contributed to modernization of the Bridge Management System, moving a Visual Basic application to .NET 12 + Blazor SSR while aligning implementation details with AASHTO / USDOT compliance requirements.",
+        "Worked across REST APIs, Azure-hosted services, email notification flows, GIS integrations, and mobile experiences; frequently assigned to ambiguous, high-responsibility projects because of prior delivery track record.",
       ],
       projects: [
         {
           name: "MRP2",
           description:
-            "Led the redesign of a legacy mainframe app into a modern .NET + Blazor solution. Integrated mapping systems (GIS), enabled mobile compatibility, and moved infrastructure to Azure, reducing costs and improving accessibility.",
-          skillNames: ["C#", ".NET", "Blazor", "HTMX", "ASP.NET Core", "Entity Framework Core", "Tailwind CSS", "MSSQL", "T-SQL"],
+            "Modernization of a legacy COBOL/JCL mainframe roadway inspection system from 1987 into a .NET + SQL Server + ArcGIS platform. Keeps inspectors, reviewers, and GIS data in near real-time sync. Inspectors now complete inspections on-site via tablet instead of by hand.",
+          skillNames: ["C#", ".NET", "Blazor", "HTMX", "ASP.NET Core", "Entity Framework Core", "Tailwind CSS", "MSSQL", "T-SQL", "GIS Integration", "COBOL"],
         },
         {
           name: "SunEx",
           description:
-            "Created a real-time incident monitoring system for highway events. Built a cross-platform mobile app and a web dashboard integrated with Sunguide APIs. Delivered push notifications, interactive maps, and real-time data pipelines using MERN stack + Firebase.",
+            "Real-time incident notification system spanning a Node.js API, MERN web application, Firebase push pipeline, and React Native / Expo mobile app. Connects to Sunguide for live highway event data and supports roughly 400 subscribed FDOT users.",
           skillNames: [
             "Expo",
             "React Native",
@@ -103,104 +100,87 @@ const seedExperiences = async () => {
         {
           name: "PDL",
           description:
-            "Replaced an outdated SharePoint workflow with a scalable system for collaborative document creation and approval. Implemented granular permissions, notifications, and audit logs for government compliance.",
+            "Workflow system for creating, routing, revising, approving, and publishing policy and procedural documents across the organization. Supports about 1,000 concurrent users across requestors, legal review, directors, and executive leadership.",
           skillNames: ["TypeScript", "Mongo DB", "Express", "React", "Node", "Mongoose", "Microsoft Entra", "Axios", "Bootstrap", "Kendo UI", "Firebase", "Docker"],
         },
         {
-          name: "Delivered iterative improvements and long-term support for multiple FDOT internal tools using Angular and .NET technologies.",
-          description: "Maintenance and new Features addition of different Kind of Projects inside the Department.",
-          skillNames: ["TypeScript", "T-SQL", "Angular", "Kendo UI", "ASP.NET Core", "MSSQL"],
+          name: "Bridge Management System (BMS)",
+          description:
+            "Modernization of a Visual Basic application to .NET 12 + Blazor SSR, aligning with AASHTO / USDOT compliance requirements. Coordinating directly with the AASHTO team to guarantee ongoing regulatory compliance.",
+          skillNames: ["C#", ".NET", "Blazor", "ASP.NET Core", "MSSQL", "T-SQL"],
         },
       ],
-
       skillNames: ["Postman", "Azure", "Azure DevOps", "YAML", "Agile"],
     },
     // HUD
     {
-      title: "Software Architect Consultant",
-      company: "US Department of Housing and Urban Development (HUD)",
+      title: "Software Architect (Consultant)",
+      company: "U.S. Department of Housing and Urban Development (HUD)",
       fromDate: new Date("11-01-2020"),
       toDate: new Date("04-01-2022"),
       responsibilities: [
-        "Spearheaded full-stack architecture, including system requirements, UX mockups, backend design, and database modeling.",
-        "Managed a small team, conducted code reviews, and established Git workflows and branching strategies.",
-        "Coordinated with non-technical stakeholders to translate policy requirements into usable features.",
-      ],
-      achievements: [
-        "Designed and developed ECP2P, a custom internal knowledge-sharing platform. Introduced AI-assisted search and structured taxonomy, significantly reducing incoming support requests",
-        "Produced interactive GIS dashboards with layered data on housing and environment, increasing public transparency and enabling data-driven policy decisions.",
+        "Architected and delivered a public-facing knowledge and Q&A platform from scratch using .NET, React, Azure Blob Storage, and supporting Azure services to centralize fragmented program information related to renting, buying, loans, and documentation.",
+        "Scaled the platform from an expected few hundred monthly users to roughly 6,000 monthly users during the first year of operation without requiring a redesign of the core architecture.",
+        "Owned system design, backend implementation, frontend direction, and overall delivery while coordinating a small team that included an additional developer and QA support.",
+        "Focused on cache-friendly access patterns and low-friction document retrieval so public users could find answers quickly rather than relying on slower call and email channels.",
       ],
       projects: [
         {
           name: "ECP2P",
-          description: "Full Implementation of a Custom Forum to handle Questions, Votes, Feedback, Directives, Laws Etc. Related to the Department.",
+          description: "Public-facing Q&A and knowledge platform centralizing HUD program information on renting, buying, loans, and documentation. Scaled to ~6,000 monthly users in its first year. Built with .NET, React, and Azure Blob Storage.",
           skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL", "SQLite", "Semantic UI", "Kendo UI", "Adobe XD", "draw.io"],
         },
       ],
       location: "Washington D.C (Remote)",
-      teamSize: 5,
+      teamSize: 3,
     },
     // SafeBuilt
     {
-      title: "Software Engineer",
+      title: "Software Engineer Consultant",
       company: "SafeBuilt (Calvin Giordano and Associates)",
       fromDate: new Date("09-01-2019"),
       toDate: new Date("10-01-2022"),
-      achievements: [
-        "Developed tools within the Gov-Easy SaaS platform to improve client onboarding and facilitate company-wide communications, supporting a smooth merger with CGA Solutions.",
-        "Designed the Security Admin Tool (SAT) to automate user onboarding and credential management. SAT enhanced organizational scalability by streamlining processes and handling increased demand during the pandemic, enabling automated workflows for employee transitions.",
-        "Created a custom Point of Sale (POS) system that maintained client data privacy while reducing operational expenses. This system facilitated secure payment processing for licenses, permits, and other transactions while allowing for efficient corrections and refunds.",
-      ],
       responsibilities: [
-        "Built mission-critical admin tools, data pipelines, and microservices to support operations across multiple city departments.",
-        "Maintained legacy systems while progressively migrating them to more modern, modular architectures.",
+        "Built a multi-tenant administrative platform during a merger and COVID-era operational transition, enabling faster onboarding, permission assignment, and client access management across a growing organization.",
+        "Integrated the system with Azure Active Directory and designed it to support both enterprise identity requirements and changing business rules during the consolidation period.",
+        "Developed additional internal systems including payment-processing middleware for permits and transaction workflows, plus SSRS reporting and maintenance/support work for legacy city portals.",
       ],
-      skills: [],
       projects: [
         {
           name: "Gov-Easy Admin Tool (GAT)",
-          description: "Internal tool to manage configurations and onboarding for local government entities. Integrated with Azure AD for secure access.",
-          skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL"],
-        },
-        {
-          name: "Gov-Easy HomePage",
-          description: "Public-facing homepage to unify access to services. Included role-based dashboards and service status.",
-          skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL"],
+          description: "Multi-tenant admin dashboard built during a company merger and COVID transition. Enabled fast employee onboarding, permission assignment, and client access management. Integrated with Azure Active Directory.",
+          skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL", "Microsoft Entra", "Kendo UI"],
         },
         {
           name: "Gov-Easy POS",
-          description: "Custom Point of Sale system integrated with tax and permit databases. Supported refunds, corrections, and offline syncing.",
+          description: "Payment-processing middleware for permits and transaction workflows. Maintained client data privacy while enabling secure processing of licenses, permits, and related transactions.",
           skillNames: ["C#", ".NET", "ASP.NET Core", "Entity Framework Core", "MSSQL", "T-SQL", "XML"],
         },
         {
           name: "Gov-Easy Reporting Services",
-          description: "Built a reporting engine using SSRS and T-SQL to generate dynamic, on-demand municipal reports.",
+          description: "Reporting engine using SSRS and T-SQL to generate dynamic, on-demand municipal reports for city portal clients.",
           skillNames: ["MSSQL", "T-SQL", "SSRS", "SSMS", "RDL"],
         },
       ],
       location: "Fort Lauderdale, FL",
       teamSize: 5,
     },
-    // Maestro SIS
+    // BocaVox / Maestro SIS
     {
-      title: "Software Developer (Integrations)",
-      company: "Maestro Student Information System by BocaVox",
+      title: "Software Engineer",
+      company: "BocaVox / Maestro SIS",
       fromDate: new Date("10-01-2017"),
       toDate: new Date("09-01-2019"),
       responsibilities: [
-        "Spearheaded system integrations between Maestro SIS and a suite of 14+ Learning Management Systems (LMS), automating synchronization of grades, attendance, and course data.",
-        "Designed and maintained middleware services for seamless and secure data exchange using multiple protocols and formats (REST, SOAP, FTP, XML, CSV, JSON).",
-        "Optimized and refactored key modules for performance, enabling sub-second response times for high-traffic educational environments.",
-      ],
-      achievements: [
-        "Developed the Maestro Integration Manager (MIM). Built a high-performance integration engine that handled real-time and scheduled data exchange across multiple LMS platforms. Implemented with multithreading, parallelism, and retry logic for robust fault tolerance and minimal downtime.",
-        "Streamlined performance: Cut processing times by up to 70% via asynchronous processing and memory-efficient serialization mechanisms.",
-        "Improved maintainability: Refactored legacy modules and implemented consistent data validation pipelines, reducing integration errors by 90%.",
+        "Designed and implemented Maestro Integration Manager (MIM), a generalized ingestion and synchronization system connecting the Maestro Student Information System to 14 LMS platforms spanning REST, SOAP, XML/JSON APIs, FTP/CSV workflows, and other integration styles.",
+        "Re-architected a nightly process that handled billions of records; by combining multithreaded C# ingestion, SQL staging, and SQL-heavy merge/cleanup phases, reduced runtime from roughly 9 hours to 30 minutes.",
+        "Avoided unnecessary serialization and ORM overhead in the hottest paths; shifted substantial processing from Entity Framework driven application logic to optimized SQL operations once data had been normalized into temporary tables.",
+        "Reduced infrastructure requirements from four collocated servers to one primary server with one secondary kept for resilience, cutting hosting costs by hundreds of thousands of dollars annually while materially improving reliability and supportability.",
       ],
       projects: [
         {
           name: "Maestro Integration Manager (MIM)",
-          description: "A high-throughput engine for syncing student records across multiple education platforms.",
+          description: "Generalized ingestion and sync engine connecting Maestro SIS to 14 LMS platforms via REST, SOAP, XML/JSON, FTP/CSV, and other styles. Reduced nightly runtime from ~9 hours to ~30 minutes and infrastructure from 4 servers to 1, saving hundreds of thousands annually.",
           skillNames: [
             "C#",
             "T-SQL",
@@ -225,38 +205,31 @@ const seedExperiences = async () => {
     },
     // eNet IT Group
     {
-      title: "Junior .NET Developer",
+      title: ".NET Developer",
       company: "eNet IT Group",
       fromDate: new Date("12-01-2016"),
       toDate: new Date("11-01-2017"),
       responsibilities: [
-        "Designed and implemented web solutions tailored for clients in automotive, marketing, and finance using modern .NET and MEAN stack technologies.",
-        "Built and deployed lightweight single-page applications and responsive business websites from scratch.",
+        "Delivered full-stack web solutions for clients in food delivery, regulated payments, and automotive inventory using .NET Core, AngularJS, and SQL Server.",
+        "Helped a food delivery client move from roughly 20 concurrent customers to about 300 concurrent customers on the web experience.",
+        "Worked on an automotive dealership platform that the client later credited with helping grow from around 1,000 monthly customers to about 6,000 monthly customers.",
       ],
-      achievements: [
-        "Developed and deployed full-stack applications for internal CRM tools and marketing analytics dashboards using Angular and ASP.NET.",
-        "Delivered 10+ static and semi-dynamic websites for small and mid-sized businesses, helping clients increase digital reach and customer engagement.",
-      ],
-      skillNames: ["ASP.NET Core", "C#", "Angular", "Mongo DB", "Node"],
+      skillNames: ["ASP.NET Core", "C#", "Angular", "MSSQL", "T-SQL", "Azure"],
       teamSize: 4,
       location: "Miami, FL",
     },
     // SYNCWARE
     {
-      title: "SharePoint Administrator and Developer",
-      company: "SYNCWARE",
+      title: "SharePoint Administrator & Developer",
+      company: "Syncware",
       fromDate: new Date("04-01-2014"),
-      toDate: new Date("12-01-2016"),
+      toDate: new Date("05-01-2016"),
       responsibilities: [
-        "Maintained and developed custom SharePoint solutions for multiple enterprise clients, extending out-of-the-box functionality with custom web parts and workflows.",
-        "Administered on-premises SharePoint environments, configured security, and performed data migrations.",
-        "Developed internal desktop utilities using C#, WPF, and PowerShell to streamline directory and account management operations.",
+        "Implemented on-premises SharePoint, SQL Server, and Exchange-backed workflow systems serving roughly 3,000–5,000 users; reduced approval and resolution timelines from multi-month delays to about 3–7 days for many cases.",
+        "Created a custom C# / WPF / PowerShell utility for reading, editing, transporting, and syncing Active Directory hierarchy data in low-connectivity environments, reducing costly travel and making directory management more efficient.",
+        "Handled hands-on administration across VMware, networking, Active Directory, and Microsoft server technologies — an early role that built the systems mindset behind later backend and modernization work.",
       ],
-      achievements: [
-        "Automated Active Directory hierarchy management using custom tools, significantly reducing manual labor for IT support teams.",
-        "Built workflow-driven document approval systems in SharePoint to replace outdated paper-based processes.",
-      ],
-      skillNames: ["C#", "ASP.NET MVC", "SharePoint", "Active Directory", "WPF", "WCF", "PowerShell"],
+      skillNames: ["C#", "ASP.NET MVC", "SharePoint", "Active Directory", "WPF", "WCF", "PowerShell", "MSSQL", "T-SQL"],
       teamSize: 6,
       location: "Havana, Cuba",
     },
@@ -870,6 +843,53 @@ const seedSkills = async () => {
       ],
       confidence: ConfidenceLevel.Medium,
     },
+
+    // Added from PDF — missing from original seed
+    {
+      name: "Git",
+      description: "Version control system used across all professional projects for source management, branching, and collaboration.",
+      yearsOfProffesionalExperience: 10,
+      yearsOfIndividualExperience: 10,
+      yearLastUse: 2025,
+      notes: ["Default VCS throughout my career.", "Familiar with branching strategies, rebasing, and PR-based workflows."],
+      confidence: ConfidenceLevel.High,
+    },
+    {
+      name: "IIS",
+      description: "Microsoft Internet Information Services — used for hosting .NET web applications on Windows servers.",
+      yearsOfProffesionalExperience: 8,
+      yearsOfIndividualExperience: 8,
+      yearLastUse: 2024,
+      notes: ["Configured and managed IIS for .NET deployments in enterprise environments.", "Used alongside Azure App Services as on-premises hosting option."],
+      confidence: ConfidenceLevel.Medium,
+    },
+    {
+      name: "GIS Integration",
+      description: "Integration with Geographic Information Systems, primarily ArcGIS, for spatial data visualization and field operations.",
+      yearsOfProffesionalExperience: 3,
+      yearsOfIndividualExperience: 3,
+      yearLastUse: 2025,
+      notes: ["Used at FDOT to keep roadway inspection data and maps in near real-time sync.", "Collaborated with GIS team to implement ArcGIS integration in MRP2."],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "COBOL",
+      description: "Legacy mainframe language encountered during the MRP2 modernization project at FDOT.",
+      yearsOfProffesionalExperience: 2,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2025,
+      notes: ["Read and interpreted COBOL/JCL source from a 1987 mainframe system to reverse-engineer business rules.", "No new development — used as a reference for modernization."],
+      confidence: ConfidenceLevel.Beginner,
+    },
+    {
+      name: "JCL",
+      description: "Job Control Language used alongside COBOL on the FDOT mainframe system that was modernized.",
+      yearsOfProffesionalExperience: 2,
+      yearsOfIndividualExperience: 0,
+      yearLastUse: 2025,
+      notes: ["Interpreted JCL scripts as part of MRP2 mainframe reverse-engineering effort."],
+      confidence: ConfidenceLevel.Beginner,
+    },
   ];
 
   await Skill.insertMany(skills);
@@ -878,17 +898,19 @@ const seedSkills = async () => {
 const seedEducation = async () => {
   const educations = [
     {
-      title: "B.Sc. Computer Sciences",
-      school: "Havana University",
-      where: "Havana, Cuba",
-      fromDate: new Date("09-01-2011"),
-      toDate: new Date("05-01-2016"),
-      responsibilities: ["Mathematics", "Programming", "CS Fundamentals", "Others"],
+      title: “B.Sc. Computer Sciences”,
+      school: “Havana University”,
+      where: “Havana, Cuba”,
+      fromDate: new Date(“09-01-2011”),
+      toDate: new Date(“05-01-2016”),
+      responsibilities: [“Mathematics”, “Programming”, “CS Fundamentals”, “Others”],
       generalNotes: [
-        "The content in this section was translated, summarized, and structured using AI based on my official university curriculum.",
-        "Courses labeled with “I” and “II” indicate multi-semester subjects. The only exception is Programming, which spans a full academic year.",
-        "If you'd like to review the original documents in Spanish, feel free to reach out — I'm happy to share them.",
-        "Some subjects were intentionally excluded as they aren't directly related to Computer Science.",
+        “Coursework completed; degree not conferred — relocated to the United States before finishing the final year.”,
+        “Completed a rigorous CS curriculum covering algorithms, data structures, compilers, programming languages, operating systems, networking, databases, software engineering, AI, statistics, calculus, hardware architecture, assembly, distributed systems, and concurrent/parallel programming.”,
+        “Built substantial academic projects including a database engine using B-trees and a compiler. Strongest academic language was C#, with additional experience in C and C++.”,
+        “The content in this section was translated, summarized, and structured using AI based on my official university curriculum.”,
+        “Courses labeled with 'I' and 'II' indicate multi-semester subjects. The only exception is Programming, which spans a full academic year.”,
+        “If you'd like to review the original documents in Spanish, feel free to reach out — I'm happy to share them.”,
       ],
     },
     {
