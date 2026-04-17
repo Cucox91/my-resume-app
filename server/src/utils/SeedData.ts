@@ -284,7 +284,7 @@ const seedSkills = async () => {
     },
     {
       name: "C",
-      description: "Low-level systems programming language I’m currently re-learning as part of my transition into embedded and high-performance computing.",
+      description: "Low-level systems programming language I'm currently re-learning as part of my transition into embedded and high-performance computing.",
       yearsOfProffesionalExperience: 0,
       yearsOfIndividualExperience: 5,
       yearLastUse: 2025,
@@ -532,7 +532,7 @@ const seedSkills = async () => {
       yearsOfProffesionalExperience: 2,
       yearsOfIndividualExperience: 2,
       yearLastUse: 2024,
-      notes: ["Enjoy the ecosystem’s speed and flexibility.", "Had challenges managing background tasks and notifications but delivered production-ready mobile apps regardless."],
+      notes: ["Enjoy the ecosystem's speed and flexibility.", "Had challenges managing background tasks and notifications but delivered production-ready mobile apps regardless."],
       confidence: ConfidenceLevel.Beginner,
     },
     {
@@ -590,7 +590,7 @@ const seedSkills = async () => {
     },
     {
       name: "MSSQL",
-      description: "Primary relational database engine used across nearly all enterprise and government projects I’ve worked on.",
+      description: "Primary relational database engine used across nearly all enterprise and government projects I've worked on.",
       yearsOfProffesionalExperience: 10,
       yearsOfIndividualExperience: 10,
       yearLastUse: 2025,
@@ -638,7 +638,7 @@ const seedSkills = async () => {
     },
     {
       name: "SSRS",
-      description: "Microsoft’s enterprise reporting tool used to build, deploy, and manage visual reports from SQL Server.",
+      description: "Microsoft's enterprise reporting tool used to build, deploy, and manage visual reports from SQL Server.",
       yearsOfProffesionalExperience: 3,
       yearsOfIndividualExperience: 0,
       yearLastUse: 2021,
@@ -711,13 +711,13 @@ const seedSkills = async () => {
       notes: [
         "Leveraged it to ship Android/iOS builds to stakeholders with ease.",
         "Hit major limitations with background tasks and native module support.",
-        "Happy it’s being phased out — looking forward to more modern alternatives.",
+        "Happy it's being phased out — looking forward to more modern alternatives.",
       ],
       confidence: ConfidenceLevel.Beginner,
     },
     {
       name: "Firebase",
-      description: "Google’s backend platform used primarily for push notifications and real-time data syncing in mobile applications.",
+      description: "Google's backend platform used primarily for push notifications and real-time data syncing in mobile applications.",
       yearsOfProffesionalExperience: 2,
       yearsOfIndividualExperience: 2,
       yearLastUse: 2024,
@@ -729,7 +729,7 @@ const seedSkills = async () => {
     },
     {
       name: "SharePoint",
-      description: "Microsoft’s collaboration and content management platform — used to build document workflows and intranet tools for enterprises.",
+      description: "Microsoft's collaboration and content management platform — used to build document workflows and intranet tools for enterprises.",
       yearsOfProffesionalExperience: 5,
       yearsOfIndividualExperience: 0,
       yearLastUse: 2016,
@@ -898,19 +898,19 @@ const seedSkills = async () => {
 const seedEducation = async () => {
   const educations = [
     {
-      title: “B.Sc. Computer Sciences”,
-      school: “Havana University”,
-      where: “Havana, Cuba”,
-      fromDate: new Date(“09-01-2011”),
-      toDate: new Date(“05-01-2016”),
-      responsibilities: [“Mathematics”, “Programming”, “CS Fundamentals”, “Others”],
+      title: "B.Sc. Computer Sciences",
+      school: "Havana University",
+      where: "Havana, Cuba",
+      fromDate: new Date("09-01-2011"),
+      toDate: new Date("05-01-2016"),
+      responsibilities: ["Mathematics", "Programming", "CS Fundamentals", "Others"],
       generalNotes: [
-        “Coursework completed; degree not conferred — relocated to the United States before finishing the final year.”,
-        “Completed a rigorous CS curriculum covering algorithms, data structures, compilers, programming languages, operating systems, networking, databases, software engineering, AI, statistics, calculus, hardware architecture, assembly, distributed systems, and concurrent/parallel programming.”,
-        “Built substantial academic projects including a database engine using B-trees and a compiler. Strongest academic language was C#, with additional experience in C and C++.”,
-        “The content in this section was translated, summarized, and structured using AI based on my official university curriculum.”,
-        “Courses labeled with 'I' and 'II' indicate multi-semester subjects. The only exception is Programming, which spans a full academic year.”,
-        “If you'd like to review the original documents in Spanish, feel free to reach out — I'm happy to share them.”,
+        "Coursework completed; degree not conferred — relocated to the United States before finishing the final year.",
+        "Completed a rigorous CS curriculum covering algorithms, data structures, compilers, programming languages, operating systems, networking, databases, software engineering, AI, statistics, calculus, hardware architecture, assembly, distributed systems, and concurrent/parallel programming.",
+        "Built substantial academic projects including a database engine using B-trees and a compiler. Strongest academic language was C#, with additional experience in C and C++.",
+        "The content in this section was translated, summarized, and structured using AI based on my official university curriculum.",
+        "Courses labeled with 'I' and 'II' indicate multi-semester subjects. The only exception is Programming, which spans a full academic year.",
+        "If you'd like to review the original documents in Spanish, feel free to reach out — I'm happy to share them.",
       ],
     },
     {
