@@ -8,6 +8,9 @@ import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import { IUser } from "../../models/IUser";
 import { getUserDetails } from "../../apis/adminApi";
+import { RESUME_USERNAME } from "../../config";
+import HobbyTable from "../hobby/HobbyTable";
+import LearningTable from "../learning/LearningTable";
 
 const Home: React.FC = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 }); // Mobile threshold
@@ -18,7 +21,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const userData = await getUserDetails("cucox91");
+        const userData = await getUserDetails(RESUME_USERNAME);
         setUser(userData);
 
         if (userData!.avatar) {
@@ -159,6 +162,28 @@ const Home: React.FC = () => {
           See More...
         </Header>
       </Divider>
+
+      {/* Hobbies */}
+      <Divider />
+      <Divider horizontal>
+        <Header as="h4">
+          <Icon name="untappd" />
+          Hobbies
+        </Header>
+      </Divider>
+      <Divider />
+      <HobbyTable />
+
+      {/* Learning */}
+      <Divider />
+      <Divider horizontal>
+        <Header as="h4">
+          <Icon name="book" />
+          Learning
+        </Header>
+      </Divider>
+      <Divider />
+      <LearningTable />
     </Container>
   );
 };

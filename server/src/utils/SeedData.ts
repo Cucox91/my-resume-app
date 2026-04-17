@@ -2,6 +2,8 @@ import Experience, { IExperience } from "../models/mongoose/ExperienceModel";
 import Education, { IEducation } from "../models/mongoose/EducationModel";
 import Subject, { ISubject } from "../models/mongoose/SubjectModel";
 import Skill, { ConfidenceLevel, ISkill } from "../models/mongoose/SkillModel";
+import Hobby from "../models/mongoose/HobbyModel";
+import Learning, { LearningStatus } from "../models/mongoose/LearningModel";
 import { HydratedDocument, Types } from "mongoose";
 
 export const seedAllData = async () => {
@@ -13,6 +15,8 @@ export const seedAllData = async () => {
   await Experience.deleteMany();
   await Education.deleteMany();
   await Subject.deleteMany();
+  await Hobby.deleteMany();
+  await Learning.deleteMany();
 
   console.log("Seeding Skills");
   const skillsCount = await Skill.countDocuments();
@@ -30,6 +34,18 @@ export const seedAllData = async () => {
   const educationCount = await Education.countDocuments();
   if (educationCount === 0) {
     await seedEducation();
+  }
+
+  console.log("Seeding Hobbies");
+  const hobbiesCount = await Hobby.countDocuments();
+  if (hobbiesCount === 0) {
+    await seedHobbies();
+  }
+
+  console.log("Seeding Learning");
+  const learningCount = await Learning.countDocuments();
+  if (learningCount === 0) {
+    await seedLearning();
   }
 
   console.log("Seed Process Completed");
@@ -1698,6 +1714,53 @@ const seedUniversitySubjects = async (myUniversity: HydratedDocument<IEducation>
     myUniversity.subjects.push(...subjects.map((subject) => subject._id as Types.ObjectId));
     await myUniversity.save();
   }
+};
+
+const seedHobbies = async () => {
+  await Hobby.insertMany([
+    { name: "Building PCs", description: "Assembling and upgrading custom desktop computers for performance and aesthetics." },
+    { name: "Chess", description: "Playing chess online and studying openings and endgame theory." },
+    { name: "Reading", description: "Mostly non-fiction — computer science, mathematics, history, and personal development." },
+    { name: "Video Games", description: "Strategy and RPG games. Currently into Civilization and Dark Souls." },
+    { name: "Cooking", description: "Experimenting with Cuban and Latin American recipes. Big fan of slow cooking." },
+  ]);
+};
+
+const seedLearning = async () => {
+  await Learning.insertMany([
+    {
+      name: "CUDA Programming",
+      description: "Learning GPU-based parallel computing using NVIDIA CUDA for high-performance applications.",
+      status: LearningStatus.InProgress,
+      url: "https://developer.nvidia.com/cuda-toolkit",
+    },
+    {
+      name: "AWS Cloud Practitioner",
+      description: "Building foundational knowledge of AWS to complement existing Azure experience.",
+      status: LearningStatus.InProgress,
+    },
+    {
+      name: "Rust",
+      description: "Exploring Rust for systems programming with a focus on memory safety and performance.",
+      status: LearningStatus.Planned,
+    },
+    {
+      name: "Next.js",
+      description: "Learning Next.js for server-side rendering and full-stack React applications.",
+      status: LearningStatus.Planned,
+    },
+    {
+      name: "Quantitative Finance Fundamentals",
+      description: "Self-study of mathematical finance, derivatives, and algorithmic trading concepts.",
+      status: LearningStatus.InProgress,
+    },
+    {
+      name: "Machine Learning with Python",
+      description: "Completed Andrew Ng's ML course. Covered regression, classification, neural networks.",
+      status: LearningStatus.Completed,
+      url: "https://www.coursera.org/learn/machine-learning",
+    },
+  ]);
 };
 
 const seedExperienceSkillsAndSave = async (myExperiences: any) => {
