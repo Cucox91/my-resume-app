@@ -8,6 +8,9 @@ import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import { IUser } from "../../models/IUser";
 import { getUserDetails } from "../../apis/adminApi";
+import { RESUME_USERNAME } from "../../config";
+import HobbyTable from "../hobby/HobbyTable";
+import LearningTable from "../learning/LearningTable";
 
 const Home: React.FC = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 }); // Mobile threshold
@@ -18,7 +21,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const userData = await getUserDetails("cucox91");
+        const userData = await getUserDetails(RESUME_USERNAME);
         setUser(userData);
 
         if (userData!.avatar) {
@@ -60,7 +63,7 @@ const Home: React.FC = () => {
 
       {isMobile && (
         <Segment basic style={{ display: "flex", alignItems: "center", marginTop: "2rem" }}>
-          <Image src={previewImage ? previewImage : "/profile.png"} alt="Profile" circular size="massive" style={{ marginRight: "2rem", maxWidth: "20rem", maxHeight: "20rem" }} />
+          <Image src={previewImage ?? "/profile.png"} alt="Profile" circular size="massive" style={{ marginRight: "2rem", maxWidth: "20rem", maxHeight: "20rem", visibility: previewImage ? "visible" : "hidden" }} />
         </Segment>
       )}
 
@@ -68,11 +71,11 @@ const Home: React.FC = () => {
       <Segment basic style={{ display: "flex", alignItems: "center", marginTop: "2rem" }}>
         {!isMobile && (
           <Image
-            src={previewImage ? previewImage : "/profile.png"}
+            src={previewImage ?? "/profile.png"}
             alt="Profile"
             circular
             size={beingHonest ? "huge" : "massive"}
-            style={{ marginRight: "2rem", maxWidth: "20rem",maxHeight: "20rem" }}
+            style={{ marginRight: "2rem", maxWidth: "20rem", maxHeight: "20rem", visibility: previewImage ? "visible" : "hidden" }}
           />
         )}
         <Segment vertical style={{ verticalAlign: "top" }}>
@@ -159,6 +162,28 @@ const Home: React.FC = () => {
           See More...
         </Header>
       </Divider>
+
+      {/* Hobbies */}
+      <Divider />
+      <Divider horizontal>
+        <Header as="h4">
+          <Icon name="untappd" />
+          Hobbies
+        </Header>
+      </Divider>
+      <Divider />
+      <HobbyTable />
+
+      {/* Learning */}
+      <Divider />
+      <Divider horizontal>
+        <Header as="h4">
+          <Icon name="book" />
+          Learning
+        </Header>
+      </Divider>
+      <Divider />
+      <LearningTable />
     </Container>
   );
 };
